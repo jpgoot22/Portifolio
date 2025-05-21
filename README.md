@@ -11,16 +11,16 @@ Este repositório foi criado para demonstrar minhas habilidades técnicas e minh
 ### 📊 Power BI
 Dashboards interativos e painéis de análise desenvolvidos com foco em visualização clara, filtros dinâmicos e informações relevantes.
 
-- [Logistica](Power%20BI/Logistica)
+- [Logistica](Power%20BI/Logistica/README.md)
 
 ### 📈 Excel
 Planilhas otimizadas com tabelas dinâmicas, fórmulas avançadas, validação de dados e automações.
 
-- [Análise de Assinantes](Excel/Analise_assinantes)
-- [Gestão Comercial](Excel/Comercial)
-- [Controle de Recibos](Excel/Controle_Recibos)
-- [Segurança do Trabalho](Excel/Segurança_trabalho)
-- [Análise de Vendas](Excel/Vendas)
+- [Análise de Assinantes](Excel/Analise_assinantes/README.md)
+- [Gestão Comercial](Excel/Comercial/README.md)
+- [Controle de Recibos](Excel/Controle_Recibos/README.md)
+- [Segurança do Trabalho](Excel/Segurança_trabalho/README.md)
+- [Análise de Vendas](Excel/Vendas/README.md)
 
 ### 🧠 SQL
 Consultas escritas com foco em análise de dados, extração de insights e manipulação de bases relacionais.
