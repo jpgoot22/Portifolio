@@ -11,14 +11,16 @@ Este repositório foi criado para demonstrar minhas habilidades técnicas e minh
 ### 📊 Power BI
 Dashboards interativos e painéis de análise desenvolvidos com foco em visualização clara, filtros dinâmicos e informações relevantes.
 
-- [Projeto 1: Nome do projeto](PowerBI/nome-do-projeto)
-- [Projeto 2: Nome do projeto](PowerBI/nome-do-projeto)
+- [Projetos](PowerBI/nome-do-projeto)
 
 ### 📈 Excel
 Planilhas otimizadas com tabelas dinâmicas, fórmulas avançadas, validação de dados e automações.
 
-- [Controle Financeiro Pessoal](Excel/controle-financeiro)
-- [Outro Projeto Excel](Excel/nome-do-projeto)
+- [Análise de Assinantes](Excel/Analise_assinantes)
+- [Gestão Comercial](Excel/Comercial)
+- [Controle de Recibos](Excel/Controle_recibos)
+- [Segurança do Trabalho](Excel/Segurança_trabalho)
+- [Análise de Vendas](Excel/Vendas)
 
 ### 🧠 SQL
 Consultas escritas com foco em análise de dados, extração de insights e manipulação de bases relacionais.
