@@ -18,7 +18,7 @@ Planilhas otimizadas com tabelas dinâmicas, fórmulas avançadas, validação d
 
 - [Análise de Assinantes](Excel/Analise_assinantes)
 - [Gestão Comercial](Excel/Comercial)
-- [Controle de Recibos](Excel/Controle_recibos)
+- [Controle de Recibos](Excel/Controle_Recibos)
 - [Segurança do Trabalho](Excel/Segurança_trabalho)
 - [Análise de Vendas](Excel/Vendas)
 
