@@ -11,7 +11,7 @@ Este repositório foi criado para demonstrar minhas habilidades técnicas e minh
 ### 📊 Power BI
 Dashboards interativos e painéis de análise desenvolvidos com foco em visualização clara, filtros dinâmicos e informações relevantes.
 
-- [Logistica](Power BI/Logistica)
+- [Logistica](Power%20BI/Logistica)
 
 ### 📈 Excel
 Planilhas otimizadas com tabelas dinâmicas, fórmulas avançadas, validação de dados e automações.
