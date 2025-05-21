@@ -7,11 +7,10 @@ Cada projeto conta com dashboards interativos e foco na visualização clara das
 
 ## 📊 Análise de Assinantes
 
-Análise do comportamento de assinantes ao longo do tempo, com métricas de crescimento, churn e retenção.
+Análise do comportamento de assinantes ao longo do tempo, com métricas de crescimento.
 
-![Análise de Assinantes](https://github.com/jpgoot22/portifolio/raw/main/Excel/Analise_assinantes/captura.png)
-
-📥 [Ver arquivo Excel](https://github.com/jpgoot22/portifolio/raw/main/Excel/Analise_assinantes/dashboard.xlsx)
+![Analise_assinantes](https://github.com/user-attachments/assets/f1c78be8-dda7-4936-9f4b-39e46f985293)
+[⬇️](https://github.com/jpgoot22/portifolio/blob/main/Excel/Analise_assinantes/Analise_assinantes.xlsx)
 
 ---
 
@@ -19,9 +18,8 @@ Análise do comportamento de assinantes ao longo do tempo, com métricas de cres
 
 Dashboard para controle de vendas, metas e comissões, ideal para acompanhar o desempenho de equipes comerciais.
 
-![Gestão Comercial](https://github.com/jpgoot22/portifolio/raw/main/Excel/Comercial/captura.png)
-
-📥 [Ver arquivo Excel](https://github.com/jpgoot22/portifolio/raw/main/Excel/Comercial/dashboard.xlsx)
+![comercial](https://github.com/user-attachments/assets/2041178d-7d2d-4288-add2-6d74429153ea)
+[⬇️](https://github.com/jpgoot22/portifolio/blob/main/Excel/Comercial/Comercial.xlsx)
 
 ---
 
@@ -29,9 +27,8 @@ Dashboard para controle de vendas, metas e comissões, ideal para acompanhar o d
 
 Planilha organizada para registro e acompanhamento de recibos e pagamentos, com foco em controle financeiro.
 
-![Controle de Recibos](https://github.com/jpgoot22/portifolio/raw/main/Excel/Controle_recibos/captura.png)
-
-📥 [Ver arquivo Excel](https://github.com/jpgoot22/portifolio/raw/main/Excel/Controle_recibos/dashboard.xlsx)
+![recibo](https://github.com/user-attachments/assets/acc5de10-23a2-4f46-99b7-28cca9f0364d) <br>
+[⬇️](https://github.com/jpgoot22/portifolio/blob/main/Excel/Controle_Recibos/Controle_Recibos.xlsx)
 
 ---
 
@@ -39,9 +36,8 @@ Planilha organizada para registro e acompanhamento de recibos e pagamentos, com 
 
 Ferramenta para monitoramento de indicadores de segurança, ocorrências, treinamentos e ações preventivas.
 
-![Segurança do Trabalho](https://github.com/jpgoot22/portifolio/raw/main/Excel/Segurança_trabalho/captura.png)
-
-📥 [Ver arquivo Excel](https://github.com/jpgoot22/portifolio/raw/main/Excel/Segurança_trabalho/dashboard.xlsx)
+![segurança_trabalho](https://github.com/user-attachments/assets/cae2a59b-571c-4d95-8fb4-e69a169202fd)
+[⬇️](https://github.com/jpgoot22/portifolio/blob/main/Excel/Seguran%C3%A7a_trabalho/Seguran%C3%A7a_Trabalho.xlsx)
 
 ---
 
@@ -49,7 +45,6 @@ Ferramenta para monitoramento de indicadores de segurança, ocorrências, treina
 
 Dashboard completo para análise de performance de vendas, produtos, clientes e metas.
 
-![Análise de Vendas](https://github.com/jpgoot22/portifolio/raw/main/Excel/Vendas/captura.png)
-
-📥 [Ver arquivo Excel](https://github.com/jpgoot22/portifolio/raw/main/Excel/Vendas/dashboard.xlsx)
+![Vendas](https://github.com/user-attachments/assets/ee9a25b1-e254-4a91-9b9f-69833cd33cc5)
+[⬇️](https://github.com/jpgoot22/portifolio/blob/main/Excel/Vendas/Vendas.xlsx)
 
