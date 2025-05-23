@@ -3,7 +3,7 @@
 Este repositório reúne soluções SQL aplicadas a diferentes contextos e conjuntos de dados, demonstrando habilidades em consulta, manipulação e análise. Cada projeto explora um cenário específico com o uso estratégico do SQL.
 
 🧑‍🎓 **Origem dos projetos:**  
-Os desafios aqui apresentados foram extraídos do curso **[CS50's Introduction to Databases with SQL]([https://cs50.harvard.edu/sql/](https://www.edx.org/learn/sql/harvard-university-cs50-s-introduction-to-databases-with-sql))**, oferecido por Harvard,que está em andamento. As soluções refletem o desenvolvimento e prática dos conceitos aprendidos durante o curso.
+Os desafios aqui apresentados foram extraídos do curso [CS50's Introduction to Databases with SQL](https://cs50.harvard.edu/sql/), oferecido por Harvard,que está em andamento. As soluções refletem o desenvolvimento e prática dos conceitos aprendidos durante o curso.
 
 ---
 
