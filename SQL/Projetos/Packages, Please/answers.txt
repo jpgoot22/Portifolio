@@ -1,9 +1,9 @@
 
-At what type of address did the Lost Letter end up?:Residential
-At what address did the Lost Letter end up?:2 Finnigan Street
+Em que tipo de endereço a Lost Letter foi parar?:Residential
+Em que endereço a Lost Letter foi parar?:2 Finnigan Street
 
-At what type of address did the Devious Delivery end up?:Police Station
-What were the contents of the Devious Delivery?:Duck debugger
+Em que tipo de endereço a Devious Delivery foi parar?:Police Station
+Quais eram os conteúdos da Devious Delivery?:Duck debugger
 
-What are the contents of the Forgotten Gift?:Flowers
-Who has the Forgotten Gift?:Mikel
+Quais são os conteúdos do Forgotten Gift?:Flowers
+Quem está com o Forgotten Gift?:Mikel
