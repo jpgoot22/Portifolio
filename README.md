@@ -28,6 +28,11 @@ Consultas escritas com foco em análise de dados, extração de insights e manip
 - [Consultas em Banco de Vendas](SQL/vendas-sql)
 - [Outro Projeto SQL](SQL/nome-do-projeto)
 
+### 🌐 Web  
+Sites desenvolvidos com **HTML**, **CSS** e **JavaScript**, com foco em usabilidade e estética minimalista. Inclui soluções práticas para o dia a dia.  
+
+- [Visualizar Projetos Web](Web/README.md)
+
 ---
 
 
