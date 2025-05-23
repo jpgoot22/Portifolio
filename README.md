@@ -1,4 +1,4 @@
-# 🎯 João Pedro | Portfólio de Projetos em Dados
+# 🎯 João Pedro | Portfólio de Projetos
 
 Seja bem-vindo ao meu portfólio! Aqui você encontrará alguns dos projetos que desenvolvi utilizando ferramentas como Excel, Power BI e SQL, com foco em análise de dados, automação, visualização e geração de insights. Além disso, criei sites utilizando HTML, CSS e JavaScript, com o suporte de inteligência artificial para facilitar o processo, mesmo sem profundo conhecimento nessas linguagens.
 
