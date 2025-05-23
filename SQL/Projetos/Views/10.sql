@@ -1,4 +1,3 @@
--- This is the "Feeling more comfortable? n° 1
 SELECT first_name, last_name
 FROM players
 WHERE height> (
