@@ -1,3 +1,5 @@
-SELECT "id"
-FROM "players"
-WHERE "debut" IS NULL;
+SELECT COUNT ("print_number")
+FROM "views"
+WHERE "artist" = 'Hokusai'
+AND "english_title"
+LIKE '%Fuji%';

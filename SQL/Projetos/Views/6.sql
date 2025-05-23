@@ -1,4 +1,3 @@
-SELECT "first_name","last_name", "debut"
-FROM "players"
-WHERE "birth_city" = 'Pittsburgh'
-ORDER BY "debut" DESC, "first_name" ASC, "last_name" ASC;
+SELECT ROUND(AVG ("entropy"),2)  AS "Hiroshige Average Entropy"
+FROM "views"
+WHERE "artist" = 'Hiroshige';
