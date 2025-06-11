@@ -2,6 +2,16 @@
 
 Este repositório apresenta a solução desenvolvida para o **desafio de Analista de Dados do iFood**, com o objetivo principal de **otimizar campanhas de marketing direto** através de uma análise aprofundada de dados de clientes e do desenvolvimento de um modelo preditivo. O foco é na maximização do retorno financeiro e no entendimento dos perfis de clientes da base da iFood.
 
+---
+
+### Conteúdo do Repositório:
+
+* **`1.0_Entendimento_e_Preparacao_Dados.ipynb`**: O notebook principal com todo o processo de análise exploratória, pré-processamento de dados e desenvolvimento dos modelos de Machine Learning.
+* **`Caso de Analista de Dados Ifood.txt`**: Documento com a explicação detalhada do desafio proposto pelo iFood.
+* **`ifood_full.pdf`**: Apresentação completa do projeto, seus resultados e insights obtidos.
+
+---
+
 ## 🎯 Objetivo do Projeto
 
 Transformar uma campanha de marketing que resultou em prejuízo (-R$ 3046 MU - Unidades Monetárias) em uma iniciativa lucrativa. Para isso, o projeto busca identificar os clientes com maior propensão a responder positivamente a uma nova campanha, aumentando o retorno sobre o investimento (ROI) e segmentando a base de clientes para campanhas mais direcionadas e estratégicas.
