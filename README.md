@@ -38,6 +38,13 @@ Dashboards interativos e painéis de análise desenvolvidos com foco em visualiz
 
 - [Logistica](Power%20BI/Logistica/README.md)
 
+
+### 📈 Análise de Dados e Machine Learning
+
+Projetos de Ciência de Dados e Machine Learning com foco em análise de grandes volumes de dados, construção de modelos preditivos e extração de *insights* estratégicos para otimização de negócios.
+
+* **[Otimização de Campanhas de Marketing – iFood](Projeto_Ifood/README.md)** — Projeto de *Data Science* para o iFood que transformou uma campanha de marketing deficitária em lucrativa através de análise de dados, segmentação de clientes e desenvolvimento de um modelo preditivo para identificar clientes promissores.
+
 ---
 
 
