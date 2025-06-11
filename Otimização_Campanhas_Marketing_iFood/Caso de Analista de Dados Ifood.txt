@@ -1,0 +1,95 @@
+Caso de Analista de Dados CRM da iFood
+
+A iFood é o aplicativo líder de entrega de comida no Brasil, presente em mais de mil cidades. Manter um alto engajamento do cliente é fundamental para o crescimento e a consolidação da posição da empresa como líder de mercado. Os Analistas de Dados que trabalham na equipe de dados são constantemente desafiados a fornecer insights e valor à empresa por meio de projetos de escopo aberto. Este caso tem como objetivo simular isso.
+
+
+
+
+Neste caso, você é apresentado a um conjunto de dados de amostra, que simula metainformações sobre o cliente e sobre as interações das campanhas da iFood com esse cliente. É seu desafio entender os dados, encontrar oportunidades de negócios e insights e propor qualquer ação orientada por dados para otimizar os resultados das campanhas e gerar valor para a empresa. Este caso visa avaliar suas habilidades e conhecimentos de Dados para duas possíveis funções:
+
+
+
+Analista de Dados de Negócios:
+Realizar análises exploratórias robustas, ricas em insights de negócios e propostas orientadas por dados para agregar valor à empresa e ter fortes habilidades de comunicação para influenciar a tomada de decisões.
+
+Análise de Dados Avançada:
+Realizar análises exploratórias robustas, usando ferramentas de análise avançada e métodos estatísticos para gerar produtos de dados para otimizar os resultados de negócios (modelos preditivos e de clusterização, por exemplo).
+
+Tenha clareza sobre qual função você deseja desempenhar na iFood e concentre sua energia para se destacar nos tópicos mais relevantes para ela. Abaixo você encontrará a descrição do caso e mais detalhes do que esperamos como sua solução. Por favor, leia atentamente até a última página.
+
+
+Uma vez concluído, você pode enviar sua solução completa para ifoodbrain hiring@ifood.com.br com o assunto: iFood DA/DArq Case Solution / "Nome do Candidato". Em circunstâncias normais, devemos dar uma resposta dentro de uma semana.
+
+Seja criativo e divirta-se.
+
+A Empresa
+
+Considere uma empresa bem estabelecida que atua no setor de varejo de alimentos. Atualmente, eles têm várias centenas de milhares de clientes registrados e atendem quase um milhão de consumidores por ano. Eles vendem produtos de 5 categorias principais: vinhos, produtos de carne rara, frutas exóticas, peixes especialmente preparados e produtos doces. Estes podem ser ainda divididos em produtos ouro e regulares. Os clientes podem encomendar e adquirir produtos por meio de 3 canais de vendas: lojas físicas, catálogos e site da empresa[cite: 14]. Globalmente, a empresa teve receitas sólidas e um resultado final saudável nos últimos 3 anos, mas as perspectivas de crescimento do lucro para os próximos 3 anos não são promissoras... Por essa razão, várias iniciativas estratégicas estão sendo consideradas para inverter essa situação. Uma delas é melhorar o desempenho das atividades de marketing, com foco especial em campanhas de marketing.
+
+
+
+
+
+O Departamento de Marketing
+
+O departamento de marketing foi pressionado a gastar seu orçamento anual de forma mais inteligente. O CMO percebe a importância de ter uma abordagem mais quantitativa ao tomar decisões, razão pela qual uma pequena equipe de cientistas de dados foi contratada com um objetivo claro em mente: construir um modelo preditivo que apoie iniciativas de marketing direto. Desejavelmente, o sucesso dessas atividades provará o valor da abordagem e convencerá os mais céticos dentro da empresa.
+
+
+
+O Objetivo
+
+O objetivo da equipe é construir um modelo preditivo que produza o maior lucro para a próxima campanha de marketing direto, agendada para o próximo mês. A nova campanha, a sexta, visa vender um novo gadget para a Base de Clientes. Para construir o modelo, uma campanha piloto envolvendo 2.240 clientes foi realizada. Os clientes foram selecionados aleatoriamente e contatados por telefone em relação à aquisição do gadget. Nos meses seguintes, os clientes que compraram a oferta foram devidamente rotulados. O custo total da campanha de amostra foi de 6.720 MU e a receita gerada pelos clientes que aceitaram a oferta foi de 3.674 MU. Globalmente, a campanha teve um lucro de -3.046 MU. A taxa de sucesso da campanha foi de 15%. O objetivo da equipe é desenvolver um modelo que preveja o comportamento do cliente e aplicá-lo ao restante da base de clientes[cite: 27]. Espera-se que o modelo permita à empresa selecionar os clientes com maior probabilidade de comprar a oferta, deixando de fora os não-respondentes, tornando a próxima campanha altamente lucrativa. Além disso, além de maximizar o lucro da campanha, o CMO está interessado em entender e estudar as características dos clientes que estão dispostos a comprar o gadget.
+
+
+
+
+
+Os Dados
+
+O conjunto de dados contém características sociodemográficas e firmográficas sobre 2.240 clientes que foram contatados. Além disso, ele contém uma flag para os clientes que responderam à campanha, comprando o produto.
+
+
+Tabela de Metadados:
+
+Característica	Descrição
+AcceptedCmp1	1 se o cliente aceitou a oferta na 1ª campanha, 0 caso contrário 
+AcceptedCmp2	1 se o cliente aceitou a oferta na 2ª campanha, 0 caso contrário 
+AcceptedCmp3	1 se o cliente aceitou a oferta na 3ª campanha, 0 caso contrário 
+AcceptedCmp4	1 se o cliente aceitou a oferta na 4ª campanha, 0 caso contrário 
+AcceptedCmp5	1 se o cliente aceitou a oferta na 5ª campanha, 0 caso contrário 
+Response (target)	1 se o cliente aceitou a oferta na última campanha, 0 caso contrário 
+Complain	1 se o cliente reclamou nos últimos 2 anos, 0 caso contrário 
+DtCustomer	Data de cadastro do cliente na empresa 
+Education	Nível de educação do cliente 
+Marital	Estado civil do cliente 
+Kidhome	Número de crianças pequenas na casa do cliente 
+Teenhome	Número de adolescentes na casa do cliente 
+Income	Renda anual da família do cliente 
+MntFish Products	Valor gasto em produtos de peixe nos últimos 2 anos 
+MntMeat Products	Valor gasto em produtos de carne nos últimos 2 anos 
+MntFruits	Valor gasto em frutas nos últimos 2 anos 
+MntSweet Products	Valor gasto em produtos doces nos últimos 2 anos 
+MntWines	Valor gasto em vinhos nos últimos 2 anos 
+MutGoldProds	Valor gasto em produtos ouro nos últimos 2 anos 
+NumDeals Purchases	Número de compras feitas com desconto 
+NumCatalog Purchases	Número de compras feitas usando catálogo 
+NumStore Purchases	Número de compras feitas diretamente em lojas 
+NumWeb Purchases	Número de compras feitas através do site da empresa 
+NumWebVisits Month	Número de visitas ao site da empresa no último mês 
+Recency	Número de dias desde a última compra 
+
+Entregáveis
+
+Os seguintes são os entregáveis mínimos exigidos:
+
+Explorar os dados - seja criativo e preste atenção aos detalhes. Você precisa fornecer à equipe de marketing uma melhor compreensão das características dos respondentes.
+Criar e descrever uma segmentação de clientes com base nos comportamentos dos clientes.
+Criar e descrever um modelo preditivo (classificação) que permita à empresa maximizar o lucro da próxima campanha de marketing.
+O que esperamos como sua solução a ser enviada:
+
+Um notebook detalhado e bem organizado (ou arquivo de código equivalente) a ser apresentado a stakeholders técnicos.
+Uma apresentação em Power Point (ou ferramenta similar) a ser apresentada a stakeholders de negócios.
+Você pode usar qualquer linguagem de programação para esta tarefa (nós usamos python). Simplicidade e consciência do que está acontecendo são preferíveis a implementações de algoritmos complexos que você não domina.
+
+
+Se sua solução satisfazer nossos critérios mínimos, você será convidado para uma apresentação técnica/de negócios. Soluções que não satisfaçam nossos critérios, mas que mostrem potencial, serão convidadas para uma breve reunião de feedback (30 min). Você deverá receber uma resposta dentro de 1-2 semanas a partir do envio do caso. Se houver alguma dúvida, por favor, não hesite em nos contatar.
