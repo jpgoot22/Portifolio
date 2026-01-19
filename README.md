@@ -55,8 +55,8 @@ Welcome to my portfolio! This repository showcases my technical expertise in **E
 </p>
 
 <a href="mailto:jpgoot22@gmail.com"><img src="https://img.shields.io/badge/-Email-c14438?style=flat&logo=Gmail&logoColor=white" alt="Gmail"></a>
-<a href="SEU_LINK_LINKEDIN"><img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=LinkedIn&logoColor=white" alt="LinkedIn"></a>
-<a href="SEU_LINK_GITHUB"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=GitHub&logoColor=white" alt="GitHub"></a>
+  <a href="https://linkedin.com/in/joãopedro-sousa"><img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=LinkedIn&logoColor=white" alt="LinkedIn"></a>
+  <a href="https://github.com/jpgoot22"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=GitHub&logoColor=white" alt="GitHub"></a>
 
 <br>
 <p align="right"><a href="#-joão-pedro--data--digital-portfolio">Back to Top ↑</a></p>
@@ -66,9 +66,8 @@ Welcome to my portfolio! This repository showcases my technical expertise in **E
 <a name="versao-em-portugues"></a>
 
 
-<br><br>
 <hr>
-<br><br>
+<br>
 
 <div align="center">
 <a name="versao-em-portugues"></a>
@@ -128,8 +127,9 @@ Seja bem-vindo ao meu portfólio! Este repositório demonstra minha capacidade t
 </p>
 
 <a href="mailto:jpgoot22@gmail.com"><img src="https://img.shields.io/badge/-Email-c14438?style=flat&logo=Gmail&logoColor=white" alt="Gmail"></a>
-<a href="SEU_LINK_LINKEDIN"><img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=LinkedIn&logoColor=white" alt="LinkedIn"></a>
-<a href="SEU_LINK_GITHUB"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=GitHub&logoColor=white" alt="GitHub"></a>
+  <a href="https://linkedin.com/in/joãopedro-sousa"><img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=LinkedIn&logoColor=white" alt="LinkedIn"></a>
+  <a href="https://github.com/jpgoot22"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=GitHub&logoColor=white" alt="GitHub"></a>
+
 
 <br>
 <p align="right"><a href="#-joão-pedro--data--digital-portfolio">Voltar ao Topo ↑</a></p>
