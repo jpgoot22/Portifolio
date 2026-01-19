@@ -12,14 +12,6 @@ Ideal para quem quer organizar os gastos sem complicações.
 
 ---
 
-## ⚽ [Dividir Times](https://gitsecond22.github.io/dividir-times/)
-
-Ferramenta prática para dividir jogadores em times equilibrados para qualquer esporte.  
-Você pode definir habilidades e níveis de cada jogador, e o sistema monta os times de forma justa.  
-Perfeito para jogos entre amigos ou torneios informais.
-
----
-
 ## 📌 [Kanban](https://gitsecond22.github.io/kanban/)
 
 Quadro Kanban básico direto no navegador.  
