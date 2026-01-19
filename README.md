@@ -1,6 +1,8 @@
 # 🎯 João Pedro | Data & Digital Portfolio
 
-[English Version](#english-version) | [Versao em Portugues](#versao-em-portugues)
+<div align="center">
+  <a href="#english-version"><b>English</b></a> • <a href="#versao-em-portugues"><b>Português</b></a>
+</div>
 
 ---
 
@@ -8,64 +10,59 @@
 
 # 🎯 João Pedro | Project Portfolio  
 
-Welcome to my portfolio! Here you’ll find some of the projects I developed using **Excel, Power BI, and SQL**, focused on **data analysis, automation, visualization, and actionable insights**. I also created websites using **HTML, CSS, and JavaScript**, with AI support to simplify development even without deep programming knowledge.  
+Welcome to my portfolio! This repository showcases my technical expertise in **Excel, Power BI, and SQL**, with a focus on **data analysis, process automation, and actionable business insights**. I also develop web solutions using **AI-assisted rapid prototyping (HTML, CSS, JS)** to deliver functional and minimalist interfaces.
 
-This repository demonstrates **my technical skills and how I approach problems with practical, visual solutions**.  
+### 🏆 Featured Project: Mini Spotify (SQL)
 
-### Featured SQL Project: Mini Spotify  
-
-**Mini Spotify** is a database project simulating a music streaming platform. It manages users, playlists, songs, albums, and artists, allowing queries to extract insights like most popular songs, active users, and playlist statistics. The project includes **entity relationship modeling, relational constraints, indexes, views, and sample queries** demonstrating analytical capabilities.  
-[Video Overview](https://www.youtube.com/watch?v=keU7UcZ_q4c)  
+**Mini Spotify** is a comprehensive database architecture simulating a music streaming ecosystem.
+* **Core Strength:** Entity-relationship modeling, relational constraints, and optimized indexing.
+* **Analytical Impact:** Designed complex views and queries to identify user retention patterns and hit-song trends.
+[View Video Overview](https://www.youtube.com/watch?v=keU7UcZ_q4c)  
 
 ---
 
-## 📂 Available Projects  
+## 📂 Project Catalog  
 
-### 📈 Excel  
-
-Optimized spreadsheets with pivot tables, advanced formulas, data validation, and automations.  
-
+### 📈 Excel | Data Engineering & Automation
+*High-performance spreadsheets utilizing Power Query, Pivot Tables, and advanced automation.*
 - [Subscriber Analysis](Excel/Analise_assinantes/README.md)  
 - [Commercial Management](Excel/Comercial/README.md)  
 - [Receipts Control](Excel/Controle_Recibos/README.md)  
 - [Workplace Safety](Excel/Segurança_trabalho/README.md)  
 - [Sales Analysis](Excel/Vendas/README.md)  
 
-### 🧠 SQL  
+### 🧠 SQL | Data Extraction & Insights
+*Advanced querying and database management developed through **Harvard's CS50 SQL**.*
+- **Mini Spotify** — Full-scale relational modeling focused on performance and business metrics.
+- [CS50 SQL Exercises](SQL/Projetos) — Practical problem-solving involving delivery logistics, sports analytics, and art collection data.
 
-SQL queries focused on **data analysis and insight extraction**, developed during Harvard's **[CS50 SQL course](https://cs50.harvard.edu/sql/)**.  
+### 📈 Data Science & Machine Learning
+*Predictive modeling and statistical analysis to drive business optimization.*
+- [iFood Marketing Optimization](Otimização_Campanhas_Marketing_iFood/README.md) — **ROI Recovery:** Pivoted a deficit-running campaign into a profitable operation using customer segmentation and predictive modeling.
 
-Projects:  
+### 🌐 Web | AI-Assisted Prototyping
+*Functional web development focused on usability and efficiency.*
+- [View Web Projects](Web/README.md)
 
-- **Mini Spotify** — Database simulating a music streaming platform with users, playlists, songs, albums, and artists. Includes relational modeling, constraints, indexes, views, and queries to extract actionable insights.  
-- [CS50 SQL Exercises](SQL/Projetos) — Practical challenges using different databases, analyzing deliveries, baseball player data, TV show episodes, and art collections.  
-
-### 🌐 Web  
-
-Websites developed with **HTML, CSS, and JavaScript**, focusing on usability and minimalistic design.  
-
-- [View Web Projects](Web/README.md)  
-
-### 📊 Power BI  
-
-Interactive dashboards with clear visualizations, dynamic filters, and actionable insights.  
-
-- [Logistics](Power%20BI/Logistica/README.md)  
-
-### 📈 Data Analysis & Machine Learning  
-
-Data Science and Machine Learning projects analyzing large datasets, building predictive models, and extracting insights for business optimization.  
-
-- [iFood Marketing Campaign Optimization](Otimização_Campanhas_Marketing_iFood/README.md) — Turned a deficit marketing campaign into a profitable one using data analysis, customer segmentation, and predictive modeling.  
+### 📊 Power BI | Strategic Dashboards
+*Interactive storytelling through data.*
+- [Logistics Dashboard](Power%20BI/Logistica/README.md)
 
 ---
 
-📧 Contact: jpgoot22@gmail.com  
-🔗 [LinkedIn](www.linkedin.com/in/joãopedro-sousa) | [GitHub](https://github.com/jpgoot22)  
+<div align="center">
 
----
+<p align="center">
+  <font color="#8b949e"><b>"Insightful data tells the story behind the numbers."</b></font>
+</p>
 
-> “Insightful data tells the story behind the numbers.”
+<a href="mailto:jpgoot22@gmail.com"><img src="https://img.shields.io/badge/-Email-c14438?style=flat&logo=Gmail&logoColor=white" alt="Gmail"></a>
+<a href="SEU_LINK_LINKEDIN"><img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=LinkedIn&logoColor=white" alt="LinkedIn"></a>
+<a href="SEU_LINK_GITHUB"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=GitHub&logoColor=white" alt="GitHub"></a>
+
+<br>
+<p align="right"><a href="#-joão-pedro--data--digital-portfolio">Back to Top ↑</a></p>
+</div>
 
 ---
 
@@ -73,63 +70,56 @@ Data Science and Machine Learning projects analyzing large datasets, building pr
 
 # 🎯 João Pedro | Portfólio de Projetos  
 
-Seja bem-vindo ao meu portfólio! Aqui você encontrará alguns dos projetos que desenvolvi utilizando **Excel, Power BI e SQL**, com foco em **análise de dados, automação, visualização e geração de insights**. Além disso, criei sites utilizando **HTML, CSS e JavaScript**, com suporte de IA para facilitar o desenvolvimento mesmo sem conhecimento profundo de programação.  
+Seja bem-vindo ao meu portfólio! Este repositório demonstra minha capacidade técnica em **Excel, Power BI e SQL**, com foco em **análise de dados, automação de processos e geração de insights estratégicos**. Também desenvolvo soluções Web através de **prototipagem rápida assistida por IA (HTML, CSS, JS)** para entregas ágeis e funcionais.
 
-Este repositório demonstra **minhas habilidades técnicas e minha forma de pensar problemas através de soluções práticas e visuais**.  
+### 🏆 Projeto em Destaque: Mini Spotify (SQL)
 
-### Projeto em Destaque: Mini Spotify  
-
-**Mini Spotify** é um projeto de banco de dados que simula uma plataforma de streaming musical. Gerencia usuários, playlists, músicas, álbuns e artistas, permitindo consultas para extrair insights como músicas mais populares, usuários ativos e estatísticas de playlists. O projeto inclui **modelagem de entidades, restrições relacionais, índices, views e queries de exemplo** que demonstram capacidades analíticas.  
+**Mini Spotify** é um ecossistema de banco de dados que simula uma plataforma de streaming musical.
+* **Diferencial Técnico:** Modelagem de entidades, restrições relacionais e otimização de performance via índices.
+* **Impacto Analítico:** Criação de views e queries complexas para identificar padrões de retenção de usuários e tendências de popularidade.
 [Vídeo de Apresentação](https://www.youtube.com/watch?v=keU7UcZ_q4c)  
 
 ---
 
-## 📂 Projetos Disponíveis  
+## 📂 Catálogo de Projetos  
 
-### 📈 Excel  
-
-Planilhas otimizadas com tabelas dinâmicas, fórmulas avançadas, validação de dados e automações.  
-
+### 📈 Excel | Engenharia de Dados e Automação
+*Planilhas de alta performance com Power Query, Tabelas Dinâmicas e automação avançada.*
 - [Análise de Assinantes](Excel/Analise_assinantes/README.md)  
 - [Gestão Comercial](Excel/Comercial/README.md)  
 - [Controle de Recibos](Excel/Controle_Recibos/README.md)  
 - [Segurança do Trabalho](Excel/Segurança_trabalho/README.md)  
 - [Análise de Vendas](Excel/Vendas/README.md)  
 
-### 🧠 SQL  
+### 🧠 SQL | Extração de Insights
+*Domínio de consultas complexas desenvolvido no curso **CS50 SQL da Harvard**.*
+- **Mini Spotify** — Modelagem relacional completa focada em métricas de negócio.
+- [Exercícios CS50 SQL](SQL/Projetos) — Resolução de problemas práticos envolvendo logística, análise de dados esportivos e coleções de arte.
 
-Consultas SQL focadas em **análise de dados e extração de insights**, desenvolvidas durante o curso **[CS50 SQL da Harvard](https://cs50.harvard.edu/sql/)**.  
+### 📈 Análise de Dados e Machine Learning
+*Modelagem preditiva e análise estatística para otimização de resultados.*
+- [iFood Marketing Optimization](Otimização_Campanhas_Marketing_iFood/README.md) — **Recuperação de ROI:** Transformação de uma campanha deficitária em lucrativa através de segmentação e modelos preditivos.
 
-Projetos:  
+### 🌐 Web | Desenvolvimento Otimizado por IA
+*Interfaces minimalistas focadas em agilidade e experiência do usuário.*
+- [Visualizar Projetos Web](Web/README.md)
 
-- **Mini Spotify** — Banco de dados simulando uma plataforma de streaming musical com usuários, playlists, músicas, álbuns e artistas. Inclui modelagem relacional, restrições, índices, views e queries para extração de insights acionáveis.  
-- [Exercícios CS50 SQL](SQL/Projetos) — Conjunto de desafios práticos usando diferentes bancos de dados, envolvendo análise de entregas, dados de jogadores de beisebol, episódios de séries e obras de arte.  
-
-### 🌐 Web  
-
-Sites desenvolvidos com **HTML, CSS e JavaScript**, com foco em usabilidade e estética minimalista.  
-
-- [Visualizar Projetos Web](Web/README.md)  
-
-### 📊 Power BI  
-
-Dashboards interativos com visualização clara, filtros dinâmicos e informações relevantes.  
-
-- [Logística](Power%20BI/Logistica/README.md)  
-
-### 📈 Análise de Dados e Machine Learning  
-
-Projetos de Ciência de Dados e Machine Learning com foco em análise de grandes volumes de dados, construção de modelos preditivos e extração de insights estratégicos para otimização de negócios.  
-
-- [Otimização de Campanhas de Marketing – iFood](Otimização_Campanhas_Marketing_iFood/README.md) — Transformou uma campanha de marketing deficitária em lucrativa através de análise de dados, segmentação de clientes e modelo preditivo.  
+### 📊 Power BI | Dashboards Estratégicos
+*Storytelling visual e dashboards interativos.*
+- [Logística](Power%20BI/Logistica/README.md)
 
 ---
 
-📧 Entre em contato: jpgoot22@gmail.com
-🔗 [LinkedIn](www.linkedin.com/in/joãopedro-sousa) | [GitHub](https://github.com/jpgoot22) 
+<div align="center">
 
----
+<p align="center">
+  <font color="#8b949e"><b>"Dados bem analisados contam histórias que números sozinhos não contam."</b></font>
+</p>
 
-> *“Dados bem analisados contam histórias que números sozinhos não contam.”*
+<a href="mailto:jpgoot22@gmail.com"><img src="https://img.shields.io/badge/-Email-c14438?style=flat&logo=Gmail&logoColor=white" alt="Gmail"></a>
+<a href="SEU_LINK_LINKEDIN"><img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=LinkedIn&logoColor=white" alt="LinkedIn"></a>
+<a href="SEU_LINK_GITHUB"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=GitHub&logoColor=white" alt="GitHub"></a>
 
-
+<br>
+<p align="right"><a href="#-joão-pedro--data--digital-portfolio">Voltar ao Topo ↑</a></p>
+</div>
