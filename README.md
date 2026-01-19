@@ -62,12 +62,22 @@ Welcome to my portfolio! This repository showcases my technical expertise in **E
 <p align="right"><a href="#-joão-pedro--data--digital-portfolio">Back to Top ↑</a></p>
 </div>
 
----
-<div align="center">
 
 <a name="versao-em-portugues"></a>
 
+
+<br><br>
+<hr>
+<br><br>
+
+<div align="center">
+<a name="versao-em-portugues"></a>
+
 # 🎯 João Pedro | Portfólio de Projetos
+
+</div>
+<br>
+
 
 </div>
 
