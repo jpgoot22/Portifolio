@@ -5,6 +5,8 @@ Aqui estão alguns dos sites que desenvolvi com HTML, CSS e JavaScript, utilizan
 ---
 
 ## 📊 [Dashboard Financeiro](https://gitsecond22.github.io/Controle-financeiro/)
+<img width="1911" height="874" alt="image" src="https://github.com/user-attachments/assets/9d8f206d-3477-4733-960c-dc9ffc0c3505" />
+
 
 Um painel simples e funcional para controle de finanças pessoais.  
 Permite registrar entradas e saídas de forma rápida e visualizar os dados com clareza.  
