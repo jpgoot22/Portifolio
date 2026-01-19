@@ -1,14 +1,12 @@
+<div align="center">
+
+<a name="english-version"></a>
+
 # 🎯 João Pedro | Data & Digital Portfolio
 
-<div align="center">
-  <a href="#english-version"><b>English</b></a> • <a href="#versao-em-portugues"><b>Português</b></a>
+[English](#english-version) • [Português](#versao-em-portugues)
 </div>
 
----
-
-## English Version
-
-# 🎯 João Pedro | Project Portfolio  
 
 Welcome to my portfolio! This repository showcases my technical expertise in **Excel, Power BI, and SQL**, with a focus on **data analysis, process automation, and actionable business insights**. I also develop web solutions using **AI-assisted rapid prototyping (HTML, CSS, JS)** to deliver functional and minimalist interfaces.
 
@@ -65,10 +63,13 @@ Welcome to my portfolio! This repository showcases my technical expertise in **E
 </div>
 
 ---
+<div align="center">
 
-## Versao em Portugues
+<a name="versao-em-portugues"></a>
 
-# 🎯 João Pedro | Portfólio de Projetos  
+# 🎯 João Pedro | Portfólio de Projetos
+
+</div>
 
 Seja bem-vindo ao meu portfólio! Este repositório demonstra minha capacidade técnica em **Excel, Power BI e SQL**, com foco em **análise de dados, automação de processos e geração de insights estratégicos**. Também desenvolvo soluções Web através de **prototipagem rápida assistida por IA (HTML, CSS, JS)** para entregas ágeis e funcionais.
 
