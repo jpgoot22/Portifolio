@@ -21,6 +21,10 @@ Uma ferramenta simples de controle financeiro que transforma dados de transaçõ
 2. Ou insira manualmente seus gastos em uma tabela.
 3. Visualize os resultados em gráficos mensais e anuais.
 
+Base de dados
+
+Acesse a base de dados utilizada pela aplicação: [Clique aqui.](https://github.com/jpgoot22/Portifolio/blob/main/Web/AI%20Financial%20Assistant.xlsx)
+
 ### Tecnologias
 - HTML
 - CSS
