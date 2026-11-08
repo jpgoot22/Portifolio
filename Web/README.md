@@ -17,13 +17,18 @@ Uma ferramenta simples de controle financeiro que transforma dados de transaçõ
 - Análises e insights financeiros gerados por IA.
 
 ### Como utilizar
-1. Importe seus dados financeiros por meio de um arquivo CSV padronizado.
-2. Ou insira manualmente seus gastos em uma tabela.
-3. Visualize os resultados em gráficos mensais e anuais.
 
-Base de dados
+1. Baixe o arquivo HTML da aplicação disponível neste repositório.
+2. Abra o arquivo HTML no navegador (não é necessário instalar nenhum programa).
+3. Utilize a base de dados de exemplo ou importe seus próprios dados financeiros em .xlsx.
+4. Se preferir, insira os gastos manualmente na tabela.
+5. Visualize seus resultados em gráficos mensais e anuais.
 
-Acesse a base de dados utilizada pela aplicação: [Clique aqui.](https://github.com/jpgoot22/Portifolio/blob/main/Web/AI%20Financial%20Assistant.xlsx)
+### Base de dados
+
+Para testar a aplicação, utilize a base de dados de exemplo:
+
+[**Baixar base de dados (.xlsx)**](https://github.com/jpgoot22/Portifolio/blob/main/Web/AI%20Financial%20Assistant.xlsx)
 
 ### Tecnologias
 - HTML
