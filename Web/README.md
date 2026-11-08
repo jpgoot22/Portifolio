@@ -41,24 +41,64 @@ Aplicar tecnologia e IA para simplificar a análise de dados financeiros e facil
 
 ---
 
-## 📌 Kanban
-<img width="1203" height="593" alt="image" src="https://github.com/user-attachments/assets/588262c9-62af-43d5-960a-47ba6c9473a5" />
+## ✈️🌍 Interactive Travel Planner
+<img width="1248" height="944" alt="image" src="https://github.com/user-attachments/assets/8dfc739b-a316-432a-9d07-1d022b7ed0b9" />
 
-Quadro Kanban básico direto no navegador.  
-Ideal para organização de tarefas pessoais ou em equipe, com uma interface intuitiva e sem distrações.  
-Crie colunas, mova cartões e acompanhe seu progresso.
+
+Interactive web application developed to organize a 10-day international trip across Ireland and London for a group of seven adults.
+
+Features:
+
+Daily itineraries organized by destination.
+
+Expandable cards with schedules, activities and travel information.
+
+Complete trip overview with an interactive timeline.
+
+Direct content editing within the application.
+
+Reset functionality to restore the original itinerary.
+
+Responsive layout and dark-themed interface.
+
+Technologies: HTML, CSS, JavaScript, Local Storage.
+
+Development: Built with AI-assisted coding and iterative refinement.
+
+Objective: Transform a complex travel-planning process into an organized, interactive and easily accessible web application.
 
 ---
 
 ## ⏳ Matriz de Eisenhower
-<img width="1520" height="655" alt="image" src="https://github.com/user-attachments/assets/4062134a-2408-42b3-aa09-505d6394e1b5" />
+<img width="1532" height="765" alt="image" src="https://github.com/user-attachments/assets/1f0cdde2-4872-457f-8ed8-a3cb7d84fdd2" />
 
-Organize suas tarefas por urgência e importância com a clássica matriz de Eisenhower.  
-Simples, direta e funcional, ajuda a priorizar o que realmente importa no seu dia a dia.
+Task Tracker | Eisenhower Matrix & Weekly Planner
 
----
+An interactive task management application combining the Eisenhower Matrix with daily and weekly planning.
 
-🌓 **Todos os sites contam com suporte a Dark Mode** para uma experiência mais confortável em qualquer ambiente.
+Features:
+
+Task prioritization based on urgency and importance.
+
+Daily and weekly planning.
+
+Drag-and-drop task organization.
+
+Task editing, deletion, and bulk entry.
+
+Duplicate task detection.
+
+Automatic local storage.
+
+Light and dark themes.
+
+Responsive interface.
+
+Technologies: HTML, CSS, JavaScript, Tailwind CSS.
+
+Objective: Combine task prioritization and execution planning in a single, intuitive productivity tool.
+
+Development: Built with AI-assisted coding and iterative refinement.
 
 
 
