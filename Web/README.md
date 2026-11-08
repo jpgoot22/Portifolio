@@ -4,14 +4,31 @@ Aqui estão alguns dos sites que desenvolvi com HTML, CSS e JavaScript, utilizan
 
 ---
 
-## 📊 Dashboard Financeiro
-<img width="1427" height="885" alt="image" src="https://github.com/user-attachments/assets/bcb5bf24-f880-4754-acda-7ed037fd8306" />
+## 📊 AI Financial Assistant
+<img width="1447" height="925" alt="image" src="https://github.com/user-attachments/assets/eca06d34-33de-44bf-b519-63ff2bc3b362" />
 
-<img width="1911" height="874" alt="image" src="https://github.com/user-attachments/assets/9d8f206d-3477-4733-960c-dc9ffc0c3505" />
 
-Um painel simples e funcional para controle de finanças pessoais.  
-Permite registrar entradas e saídas de forma rápida e visualizar os dados com clareza.  
-Ideal para quem quer organizar os gastos sem complicações.
+Uma ferramenta simples de controle financeiro que transforma dados de transações em gráficos intuitivos e análises inteligentes com IA.
+
+### Funcionalidades
+- Importação de dados financeiros via CSV padronizado.
+- Visualização de gastos mensais e anuais.
+- Gráficos interativos e de fácil compreensão.
+- Análises e insights financeiros gerados por IA.
+
+### Como utilizar
+1. Importe seus dados financeiros por meio de um arquivo CSV padronizado.
+2. Ou insira manualmente seus gastos em uma tabela.
+3. Visualize os resultados em gráficos mensais e anuais.
+
+### Tecnologias
+- HTML
+- CSS
+- JavaScript
+- Inteligência Artificial (utilizada no desenvolvimento do código).
+
+### Objetivo
+Aplicar tecnologia e IA para simplificar a análise de dados financeiros e facilitar a tomada de decisões.
 
 ---
 
