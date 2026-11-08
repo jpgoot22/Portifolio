@@ -1,1 +1,935 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Financeiro Interativo</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+        }
 
+        body {
+            background-color: #44634c;
+            color: #ffffff;
+            padding: 16px;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Header e Botões de Ação */
+        .header-bar {
+            background-color: #354e3c;
+            padding: 14px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #e2f0e6;
+        }
+
+        .controls-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .select-ano {
+            background-color: #2c4233;
+            color: #ffffff;
+            border: 1px solid #6a9b77;
+            padding: 9px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .select-ano:hover {
+            border-color: #a4c4ac;
+        }
+
+        .btn {
+            background-color: #557d60;
+            color: white;
+            border: 1px solid #6a9b77;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background-color: #649371;
+            transform: translateY(-1px);
+        }
+
+        .btn-clear {
+            background-color: #a34848;
+            border-color: #bd5656;
+        }
+
+        .btn-clear:hover {
+            background-color: #b85252;
+        }
+
+        #excelInput {
+            display: none;
+        }
+
+        /* Cartões KPI */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .kpi-card {
+            background-color: #354e3c;
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-top: 4px solid #557d60;
+        }
+
+        .kpi-card.despesa { border-top-color: #e74c3c; }
+        .kpi-card.investimento { border-top-color: #3498db; }
+        .kpi-card.salario { border-top-color: #9b59b6; }
+
+        .kpi-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #b2ceb9;
+            margin-bottom: 6px;
+        }
+
+        .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        /* Main Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1.1fr;
+            gap: 16px;
+            position: relative;
+        }
+
+        .grid-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .panel-card {
+            background-color: #354e3c;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .panel-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #d1e4d6;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            flex: 1;
+            min-height: 260px;
+        }
+
+        /* Suporte a Rolagem para o Gráfico de Descrição */
+        .chart-wrapper.scrollable {
+            max-height: 280px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 4px;
+        }
+
+        .chart-wrapper.scrollable::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chart-wrapper.scrollable::-webkit-scrollbar-thumb {
+            background: #557d60;
+            border-radius: 4px;
+        }
+
+        /* Overlay de Tela Limpa / Aguardando Arquivo */
+        .empty-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(53, 78, 60, 0.98);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .empty-overlay h3 {
+            font-size: 1.3rem;
+            color: #e2f0e6;
+            margin-bottom: 8px;
+        }
+
+        .empty-overlay p {
+            font-size: 0.92rem;
+            color: #b2ceb9;
+            margin-bottom: 16px;
+            max-width: 450px;
+        }
+
+        /* Filters Layout */
+        .slicers-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .slicer-box {
+            background-color: #2c4233;
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            max-height: 260px;
+        }
+
+        .slicer-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #a4c4ac;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .slicer-list {
+            list-style: none;
+            overflow-y: auto;
+            flex: 1;
+            padding-right: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .slicer-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .slicer-list::-webkit-scrollbar-thumb {
+            background: #557d60;
+            border-radius: 3px;
+        }
+
+        .slicer-item {
+            padding: 6px 10px;
+            font-size: 0.82rem;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #354e3c;
+            color: #d8e6dc;
+            transition: all 0.15s ease;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slicer-item:hover {
+            background-color: #43634c;
+        }
+
+        .slicer-item.selected {
+            background-color: #557d60;
+            color: #ffffff;
+            font-weight: 700;
+            box-shadow: inset 3px 0 0 #00cec9;
+        }
+
+        .empty-slicer-text {
+            font-size: 0.8rem;
+            color: #80a388;
+            font-style: italic;
+            padding: 8px 4px;
+        }
+
+        .filter-hint {
+            font-size: 0.75rem;
+            color: #a4c4ac;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .active-filter-badge {
+            font-size: 0.75rem;
+            background-color: #557d60;
+            padding: 3px 8px;
+            border-radius: 10px;
+            color: #ffffff;
+        }
+
+        @media (max-width: 992px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="header-bar">
+        <div class="header-title">
+            📊 Dashboard Financeiro Interativo
+        </div>
+        <div class="controls-group">
+            <select id="selectAno" class="select-ano" onchange="onAnoChange()">
+                <option value="todos">📅 Todos os Anos</option>
+            </select>
+
+            <input type="file" id="excelInput" accept=".xlsx, .xls, .csv" />
+            <button class="btn" onclick="document.getElementById('excelInput').click()">
+                📂 Importar Excel
+            </button>
+            <button class="btn btn-clear" onclick="clearFilters()">
+                🧹 Limpar Filtros
+            </button>
+        </div>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi-card despesa">
+            <div class="kpi-label">Despesa</div>
+            <div class="kpi-value" id="kpiDespesa">R$ 0,00</div>
+        </div>
+        <div class="kpi-card investimento">
+            <div class="kpi-label">Investimento</div>
+            <div class="kpi-value" id="kpiInvestimento">R$ 0,00</div>
+        </div>
+        <div class="kpi-card salario">
+            <div class="kpi-label">Salário</div>
+            <div class="kpi-value" id="kpiSalario">R$ 0,00</div>
+        </div>
+    </div>
+
+    <div class="main-grid">
+        <div class="empty-overlay" id="emptyStateOverlay">
+            <h3>Dashboard Limpo - NENHUM DADO CARREGADO</h3>
+            <p>Selecione seu arquivo Excel para visualizar os indicadores e gráficos. Clique nos gráficos para filtrar todo o layout!</p>
+            <button class="btn" onclick="document.getElementById('excelInput').click()">
+                📂 Importar Planilha Excel
+            </button>
+        </div>
+
+        <div class="grid-column">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span>Despesas por Descrição <small style="font-weight:normal; opacity:0.8;">(Clique p/ filtrar)</small></span>
+                    <span id="descFilterBadge" class="active-filter-badge" style="display:none">Filtrado</span>
+                </div>
+                <div class="chart-wrapper scrollable">
+                    <div id="chartDescContainer" style="position: relative; width: 100%; min-height: 260px;">
+                        <canvas id="chartDescricao"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span>Despesas por Categoria <small style="font-weight:normal; opacity:0.8;">(Clique p/ filtrar)</small></span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="chartCategoria"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-column">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span>Comparativo Mensal <small style="font-weight:normal; opacity:0.8;">(Clique no mês p/ filtrar)</small></span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="chartMensal"></canvas>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span>Filtros do Dashboard</span>
+                </div>
+                <div class="slicers-wrapper">
+                    <div class="slicer-box">
+                        <div class="slicer-title">Categoria</div>
+                        <ul class="slicer-list" id="slicerCategoria">
+                            <li class="empty-slicer-text">Aguardando arquivo...</li>
+                        </ul>
+                    </div>
+                    <div class="slicer-box">
+                        <div class="slicer-title">Mês</div>
+                        <ul class="slicer-list" id="slicerMes">
+                            <li class="empty-slicer-text">Aguardando arquivo...</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="filter-hint">Segure <b>CTRL</b> p/ múltiplos. Clique na barra de qualquer gráfico para filtrar!</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Estado Global
+    let rawData = [];
+    let selectedCategories = new Set();
+    let selectedMonths = new Set();
+    let selectedDescriptions = new Set();
+    let selectedYear = 'todos';
+
+    // Instâncias dos Gráficos
+    let chartDescInstance = null;
+    let chartCatInstance = null;
+    let chartMensalInstance = null;
+
+    const MONTH_NAMES = [
+        'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+        'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+    ];
+
+    // Formatadores Monetários
+    function formatCurrency(value) {
+        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value || 0);
+    }
+
+    function formatShortCurrency(value) {
+        if (Math.abs(value) >= 1000) {
+            return 'R$ ' + (value / 1000).toFixed(1).replace('.', ',') + 'K';
+        }
+        return 'R$ ' + Math.round(value);
+    }
+
+    // Leitor de Números de Alta Precisão
+    function parseNumber(val) {
+        if (val === null || val === undefined || val === '') return 0;
+        if (typeof val === 'number') return isNaN(val) ? 0 : val;
+
+        let str = String(val).trim();
+        
+        let isNegative = false;
+        if (str.startsWith('(') && str.endsWith(')')) {
+            isNegative = true;
+            str = str.substring(1, str.length - 1);
+        } else if (str.startsWith('-')) {
+            isNegative = true;
+            str = str.substring(1);
+        }
+
+        str = str.replace(/R\$/gi, '').replace(/[\s\u00a0]/g, '').trim();
+
+        if (str.includes('.') && str.includes(',')) {
+            str = str.replace(/\./g, '').replace(',', '.');
+        } else if (str.includes(',')) {
+            str = str.replace(',', '.');
+        }
+
+        let parsed = parseFloat(str);
+        if (isNaN(parsed)) return 0;
+        return isNegative ? -Math.abs(parsed) : parsed;
+    }
+
+    // Leitor e Normalizador de Datas
+    function parseDate(val) {
+        if (!val) return { month: 'indefinido', year: null };
+
+        let dateObj = null;
+
+        if (val instanceof Date) {
+            dateObj = val;
+        } else if (typeof val === 'number') {
+            dateObj = new Date(Math.round((val - 25569) * 86400 * 1000));
+        } else {
+            let str = String(val).trim();
+            let parts = str.split(/[\/\-\.]/);
+            
+            if (parts.length === 3) {
+                let p1 = parseInt(parts[0], 10);
+                let p2 = parseInt(parts[1], 10);
+                let p3 = parseInt(parts[2], 10);
+
+                if (p1 > 1000) { 
+                    dateObj = new Date(p1, p2 - 1, p3);
+                } else if (p3 > 1000) { 
+                    dateObj = new Date(p3, p2 - 1, p1);
+                } else {
+                    dateObj = new Date(str);
+                }
+            } else {
+                dateObj = new Date(str);
+            }
+        }
+
+        if (!dateObj || isNaN(dateObj.getTime())) {
+            return { month: 'indefinido', year: null };
+        }
+
+        const monthIdx = dateObj.getMonth();
+        return {
+            month: MONTH_NAMES[monthIdx] || 'indefinido',
+            year: dateObj.getFullYear()
+        };
+    }
+
+    function getRowValue(row, targetKey) {
+        if (!row) return undefined;
+        const normTarget = targetKey.toLowerCase().replace(/[\s\u00a0]/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        
+        for (let key in row) {
+            if (Object.prototype.hasOwnProperty.call(row, key)) {
+                const normKey = String(key).toLowerCase().replace(/[\s\u00a0]/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                if (normKey === normTarget) {
+                    return row[key];
+                }
+            }
+        }
+        return undefined;
+    }
+
+    function normalizeTipo(rawTipo) {
+        if (!rawTipo) return 'despesa';
+        const str = String(rawTipo).toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (str.includes('salari')) return 'salario';
+        if (str.includes('investim')) return 'investimento';
+        if (str.includes('despes')) return 'despesa';
+        return str;
+    }
+
+    function initDashboard(data) {
+        if (!data || data.length === 0) return;
+
+        rawData = data.map(row => {
+            const rawDataVal = getRowValue(row, 'Data') || getRowValue(row, 'Data(d,m,a)');
+            const rawTipoVal = getRowValue(row, 'Tipo');
+            const rawCatVal = getRowValue(row, 'Categoria');
+            const rawDescVal = getRowValue(row, 'Descrição') || getRowValue(row, 'Descricao');
+            const rawValorVal = getRowValue(row, 'Valor');
+
+            const parsedD = parseDate(rawDataVal);
+            const val = parseNumber(rawValorVal);
+            const tipoOriginal = String(rawTipoVal || '').trim();
+            const tipoNorm = normalizeTipo(tipoOriginal);
+            const cat = String(rawCatVal || 'Outros').trim();
+            const desc = String(rawDescVal || '').trim();
+
+            return {
+                Month: parsedD.month,
+                Year: parsedD.year,
+                TipoOriginal: tipoOriginal,
+                TipoNorm: tipoNorm,
+                Categoria: cat,
+                Descrição: desc,
+                Valor: val
+            };
+        });
+
+        document.getElementById('emptyStateOverlay').style.display = 'none';
+
+        populateYearSelect();
+        populateSlicers();
+        updateDashboard();
+    }
+
+    function populateYearSelect() {
+        const years = Array.from(new Set(rawData.map(r => r.Year))).filter(Boolean).sort((a,b) => a - b);
+        const selectAno = document.getElementById('selectAno');
+        selectAno.innerHTML = '<option value="todos">📅 Todos os Anos</option>';
+
+        years.forEach(year => {
+            const opt = document.createElement('option');
+            opt.value = String(year);
+            opt.textContent = '📅 Ano ' + year;
+            selectAno.appendChild(opt);
+        });
+
+        selectAno.value = selectedYear;
+    }
+
+    function onAnoChange() {
+        selectedYear = document.getElementById('selectAno').value;
+        populateSlicers();
+        updateDashboard();
+    }
+
+    function populateSlicers() {
+        const yearFiltered = rawData.filter(item => selectedYear === 'todos' || String(item.Year) === selectedYear);
+
+        const categories = Array.from(new Set(yearFiltered.map(r => r.Categoria))).filter(Boolean).sort();
+        const slicerCat = document.getElementById('slicerCategoria');
+        slicerCat.innerHTML = '';
+
+        if (categories.length === 0) {
+            slicerCat.innerHTML = '<li class="empty-slicer-text">Nenhuma categoria</li>';
+        } else {
+            categories.forEach(cat => {
+                const li = document.createElement('li');
+                li.className = 'slicer-item' + (selectedCategories.has(cat) ? ' selected' : '');
+                li.textContent = cat;
+                li.onclick = (e) => toggleFilter('category', cat, e.ctrlKey || e.metaKey);
+                slicerCat.appendChild(li);
+            });
+        }
+
+        const presentMonths = Array.from(new Set(yearFiltered.map(r => r.Month))).filter(m => m !== 'indefinido');
+        const sortedMonths = MONTH_NAMES.filter(m => presentMonths.includes(m));
+        
+        const slicerMes = document.getElementById('slicerMes');
+        slicerMes.innerHTML = '';
+
+        if (sortedMonths.length === 0) {
+            slicerMes.innerHTML = '<li class="empty-slicer-text">Nenhum mês</li>';
+        } else {
+            sortedMonths.forEach(mes => {
+                const li = document.createElement('li');
+                li.className = 'slicer-item' + (selectedMonths.has(mes) ? ' selected' : '');
+                li.textContent = mes;
+                li.onclick = (e) => toggleFilter('month', mes, e.ctrlKey || e.metaKey);
+                slicerMes.appendChild(li);
+            });
+        }
+    }
+
+    function toggleFilter(type, value, isCtrl = false) {
+        let set;
+        if (type === 'category') set = selectedCategories;
+        else if (type === 'month') set = selectedMonths;
+        else if (type === 'description') set = selectedDescriptions;
+
+        if (isCtrl) {
+            if (set.has(value)) set.delete(value);
+            else set.add(value);
+        } else {
+            if (set.has(value) && set.size === 1) set.clear();
+            else {
+                set.clear();
+                set.add(value);
+            }
+        }
+
+        populateSlicers();
+        updateDashboard();
+    }
+
+    function clearFilters() {
+        selectedCategories.clear();
+        selectedMonths.clear();
+        selectedDescriptions.clear();
+        selectedYear = 'todos';
+        document.getElementById('selectAno').value = 'todos';
+        populateSlicers();
+        updateDashboard();
+    }
+
+    function getFilteredData() {
+        return rawData.filter(item => {
+            const matchYear = selectedYear === 'todos' || String(item.Year) === selectedYear;
+            const matchCat = selectedCategories.size === 0 || selectedCategories.has(item.Categoria);
+            const matchMonth = selectedMonths.size === 0 || selectedMonths.has(item.Month);
+            const matchDesc = selectedDescriptions.size === 0 || selectedDescriptions.has(item.Descrição);
+            return matchYear && matchCat && matchMonth && matchDesc;
+        });
+    }
+
+    function updateDashboard() {
+        if (rawData.length === 0) {
+            document.getElementById('kpiDespesa').textContent = formatCurrency(0);
+            document.getElementById('kpiInvestimento').textContent = formatCurrency(0);
+            document.getElementById('kpiSalario').textContent = formatCurrency(0);
+            return;
+        }
+
+        const filtered = getFilteredData();
+
+        let totalDespesa = 0;
+        let totalInvestimento = 0;
+        let totalSalario = 0;
+
+        filtered.forEach(item => {
+            const val = Math.abs(item.Valor);
+
+            if (item.TipoNorm === 'salario') {
+                totalSalario += val;
+            } else if (item.TipoNorm === 'investimento') {
+                totalInvestimento += val;
+            } else if (item.TipoNorm === 'despesa') {
+                totalDespesa += val;
+            }
+        });
+
+        document.getElementById('kpiDespesa').textContent = formatCurrency(totalDespesa);
+        document.getElementById('kpiInvestimento').textContent = formatCurrency(totalInvestimento);
+        document.getElementById('kpiSalario').textContent = formatCurrency(totalSalario);
+
+        const isFiltered = selectedCategories.size > 0 || selectedMonths.size > 0 || selectedDescriptions.size > 0 || selectedYear !== 'todos';
+        document.getElementById('descFilterBadge').style.display = isFiltered ? 'inline-block' : 'none';
+
+        renderChartDescricao(filtered);
+        renderChartCategoria(filtered);
+        renderChartMensal(filtered);
+    }
+
+    // Gráfico 1: Despesas por Descrição (Com Altura Dinâmica, Scroll e Tamanho de Barra Fixo)
+    function renderChartDescricao(data) {
+        const descMap = {};
+        data.forEach(item => {
+            if (item.TipoNorm === 'despesa' && item.Descrição) {
+                descMap[item.Descrição] = (descMap[item.Descrição] || 0) + Math.abs(item.Valor);
+            }
+        });
+
+        const sorted = Object.entries(descMap).sort((a, b) => b[1] - a[1]);
+        const labels = sorted.map(i => i[0]);
+
+        // Ajuste de Altura Dinâmica do Container para caber todos sem achatar
+        const descContainer = document.getElementById('chartDescContainer');
+        const itemHeight = 36; // 36px por linha de descrição
+        const calculatedHeight = Math.max(260, labels.length * itemHeight + 30);
+        descContainer.style.height = calculatedHeight + 'px';
+
+        const ctx = document.getElementById('chartDescricao').getContext('2d');
+        if (chartDescInstance) chartDescInstance.destroy();
+
+        const bgColors = labels.map(l => selectedDescriptions.has(l) ? '#f39c12' : '#e74c3c');
+
+        chartDescInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Despesa (R$)',
+                    data: sorted.map(i => i[1]),
+                    backgroundColor: bgColors,
+                    borderRadius: 4,
+                    barThickness: 18 // Espessura fixa idêntica ao comparativo mensal
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                onClick: (evt, activeEls) => {
+                    if (activeEls.length > 0) {
+                        const index = activeEls[0].index;
+                        const selectedLabel = labels[index];
+                        toggleFilter('description', selectedLabel, evt.native.ctrlKey || evt.native.metaKey);
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: (ctx) => ' ' + formatCurrency(ctx.raw) } }
+                },
+                scales: {
+                    x: { ticks: { color: '#a4c4ac', callback: (v) => formatShortCurrency(v) }, grid: { color: '#3d5a46' } },
+                    y: { 
+                        ticks: { 
+                            color: '#ffffff', 
+                            font: { size: 11 },
+                            autoSkip: false // Garante a exibição de TODOS os nomes de descrição
+                        }, 
+                        grid: { display: false } 
+                    }
+                }
+            }
+        });
+    }
+
+    // Gráfico 2: Despesas por Categoria
+    function renderChartCategoria(data) {
+        const catMap = {};
+        data.forEach(item => {
+            if (item.TipoNorm === 'despesa') {
+                catMap[item.Categoria] = (catMap[item.Categoria] || 0) + Math.abs(item.Valor);
+            }
+        });
+
+        const sorted = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+        const ctx = document.getElementById('chartCategoria').getContext('2d');
+        if (chartCatInstance) chartCatInstance.destroy();
+
+        const labels = sorted.map(i => i[0]);
+        const bgColors = labels.map(l => selectedCategories.has(l) ? '#f39c12' : '#e74c3c');
+
+        chartCatInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Despesa (R$)',
+                    data: sorted.map(i => i[1]),
+                    backgroundColor: bgColors,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                onClick: (evt, activeEls) => {
+                    if (activeEls.length > 0) {
+                        const index = activeEls[0].index;
+                        const selectedLabel = labels[index];
+                        toggleFilter('category', selectedLabel, evt.native.ctrlKey || evt.native.metaKey);
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: (ctx) => ' ' + formatCurrency(ctx.raw) } }
+                },
+                scales: {
+                    x: { ticks: { color: '#ffffff', font: { size: 10 } }, grid: { display: false } },
+                    y: { ticks: { color: '#a4c4ac', callback: (v) => formatShortCurrency(v) }, grid: { color: '#3d5a46' } }
+                }
+            }
+        });
+    }
+
+    // Gráfico 3: Comparativo Mensal
+    function renderChartMensal(data) {
+        const monthlyData = {};
+        MONTH_NAMES.forEach(m => { monthlyData[m] = { salario: 0, investimento: 0, despesa: 0 }; });
+
+        data.forEach(item => {
+            if (monthlyData[item.Month]) {
+                const val = Math.abs(item.Valor);
+                if (item.TipoNorm === 'salario') {
+                    monthlyData[item.Month].salario += val;
+                } else if (item.TipoNorm === 'investimento') {
+                    monthlyData[item.Month].investimento += val;
+                } else if (item.TipoNorm === 'despesa') {
+                    monthlyData[item.Month].despesa += val;
+                }
+            }
+        });
+
+        const activeMonths = MONTH_NAMES.filter(m => rawData.some(r => r.Month === m && (selectedYear === 'todos' || String(r.Year) === selectedYear)));
+        const ctx = document.getElementById('chartMensal').getContext('2d');
+        if (chartMensalInstance) chartMensalInstance.destroy();
+
+        chartMensalInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: activeMonths,
+                datasets: [
+                    { label: 'Salário', data: activeMonths.map(m => monthlyData[m].salario), backgroundColor: '#9b59b6', borderRadius: 4 },
+                    { label: 'Investimento', data: activeMonths.map(m => monthlyData[m].investimento), backgroundColor: '#3498db', borderRadius: 4 },
+                    { label: 'Despesa', data: activeMonths.map(m => monthlyData[m].despesa), backgroundColor: '#e74c3c', borderRadius: 4 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                onClick: (evt, activeEls) => {
+                    if (activeEls.length > 0) {
+                        const index = activeEls[0].index;
+                        const selectedMonth = activeMonths[index];
+                        toggleFilter('month', selectedMonth, evt.native.ctrlKey || evt.native.metaKey);
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#ffffff', font: { size: 12 } } },
+                    tooltip: { callbacks: { label: (ctx) => ' ' + ctx.dataset.label + ': ' + formatCurrency(ctx.raw) } }
+                },
+                scales: {
+                    x: { ticks: { color: '#ffffff' }, grid: { display: false } },
+                    y: { ticks: { color: '#a4c4ac', callback: (v) => formatShortCurrency(v) }, grid: { color: '#3d5a46' } }
+                }
+            }
+        });
+    }
+
+    // Leitura do Arquivo Excel
+    document.getElementById('excelInput').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (evt) {
+            try {
+                const data = new Uint8Array(evt.target.result);
+                const workbook = XLSX.read(data, { type: 'array', cellDates: true });
+                const firstSheet = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheet];
+                
+                const parsedJson = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+
+                if (parsedJson && parsedJson.length > 0) {
+                    clearFilters();
+                    initDashboard(parsedJson);
+                } else {
+                    alert('O arquivo Excel enviado está vazio ou sem dados legíveis.');
+                }
+            } catch (err) {
+                alert('Erro ao processar o arquivo Excel: ' + err.message);
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        updateDashboard();
+    });
+</script>
+
+</body>
+</html>
