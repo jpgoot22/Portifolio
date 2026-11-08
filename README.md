@@ -8,7 +8,7 @@
 </div>
 
 
-Welcome to my portfolio! This repository showcases my technical expertise in **Excel, Power BI, and SQL**, with a focus on **data analysis, process automation, and actionable business insights**. I also develop web solutions using **AI-assisted rapid prototyping (HTML, CSS, JS)** to deliver functional and minimalist interfaces.
+Welcome to my portfolio! I build practical digital solutions by combining **data analysis, process automation, and AI-assisted development**. My experience includes **Excel, Power BI, SQL, and web technologies (HTML, CSS, JS)**, with a focus on transforming business problems into functional and efficient tools.
 
 ### 🏆 Featured Project: Mini Spotify (SQL)
 
@@ -38,8 +38,10 @@ Welcome to my portfolio! This repository showcases my technical expertise in **E
 *Predictive modeling and statistical analysis to drive business optimization.*
 - [iFood Marketing Optimization](Otimização_Campanhas_Marketing_iFood/README.md) — **ROI Recovery:** Pivoted a deficit-running campaign into a profitable operation using customer segmentation and predictive modeling.
 
-### 🌐 Web | AI-Assisted Prototyping
-*Functional web development focused on usability and efficiency.*
+### 🌐 Web | AI & Rapid Prototyping
+Practical web applications built with AI-assisted development, focusing on usability, data visualization, and problem-solving.
+
+AI Financial Assistant — A browser-based financial dashboard that transforms transaction data into intuitive monthly and yearly visualizations.
 - [View Web Projects](Web/README.md)
 
 ### 📊 Power BI | Strategic Dashboards
@@ -80,7 +82,7 @@ Welcome to my portfolio! This repository showcases my technical expertise in **E
 
 </div>
 
-Seja bem-vindo ao meu portfólio! Este repositório demonstra minha capacidade técnica em **Excel, Power BI e SQL**, com foco em **análise de dados, automação de processos e geração de insights estratégicos**. Também desenvolvo soluções Web através de **prototipagem rápida assistida por IA (HTML, CSS, JS)** para entregas ágeis e funcionais.
+Seja bem-vindo ao meu portfólio! Desenvolvo soluções digitais práticas combinando análise de dados, automação de processos e desenvolvimento assistido por IA. Minha experiência envolve Excel, Power BI, SQL e tecnologias Web (HTML, CSS, JS), com foco em transformar problemas reais em ferramentas funcionais e eficientes.
 
 ### 🏆 Projeto em Destaque: Mini Spotify (SQL)
 
@@ -110,9 +112,12 @@ Seja bem-vindo ao meu portfólio! Este repositório demonstra minha capacidade t
 *Modelagem preditiva e análise estatística para otimização de resultados.*
 - [iFood Marketing Optimization](Otimização_Campanhas_Marketing_iFood/README.md) — **Recuperação de ROI:** Transformação de uma campanha deficitária em lucrativa através de segmentação e modelos preditivos.
 
-### 🌐 Web | Desenvolvimento Otimizado por IA
-*Interfaces minimalistas focadas em agilidade e experiência do usuário.*
-- [Visualizar Projetos Web](Web/README.md)
+### 🌐 Web | AI & Rapid Prototyping
+Practical web applications built with AI-assisted development, focusing on usability, data visualization, and problem-solving.
+
+AI Financial Assistant — A browser-based financial dashboard that transforms transaction data into intuitive monthly and yearly visualizations.
+- (Web/README.md)
+
 
 ### 📊 Power BI | Dashboards Estratégicos
 *Storytelling visual e dashboards interativos.*
