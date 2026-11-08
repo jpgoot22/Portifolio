@@ -116,7 +116,7 @@ Seja bem-vindo ao meu portfólio! Desenvolvo soluções digitais práticas combi
 Practical web applications built with AI-assisted development, focusing on usability, data visualization, and problem-solving.
 
 AI Financial Assistant — A browser-based financial dashboard that transforms transaction data into intuitive monthly and yearly visualizations.
-- (Web/README.md)
+- [View Web Projects](Web/README.md)
 
 
 ### 📊 Power BI | Dashboards Estratégicos
