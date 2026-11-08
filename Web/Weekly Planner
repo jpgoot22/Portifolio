@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz de Eisenhower - Gerenciador de Tarefas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='100'>📝</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; 
+            color: #e0e0e0; 
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .quadrant, .week-column, .today-column {
+            background-color: #1e1e1e; 
+            border-color: #424242; 
+            min-height: 200px;
+            transition: background-color 0.2s, border-color 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border-width: 1px;
+        }
+
+        /* Colunas de Planejamento (Schedules) */
+        .week-column {
+            background-color: #1a1525; 
+            border-color: #3b2a54;
+        }
+        .today-column {
+            background-color: #111a2e; 
+            border-color: #243554;
+        }
+
+        /* Cores de Títulos */
+        #do .quadrant-title { color: #f28b82; }
+        #decide .quadrant-title { color: #8ab4f8; }
+        #delegate .quadrant-title { color: #fdd663; }
+        #delete .quadrant-title { color: #81c995; }
+        .week-title { color: #c084fc; } /* Roxo */
+        .today-title { color: #64ffda; } /* Ciano/Verde */
+
+        .task {
+            background-color: #2c2c2c; 
+            border-color: #4a4a4a; 
+            color: #e0e0e0; 
+            cursor: grab;
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border-width: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            word-break: break-word; 
+        }
+
+        .task:hover {
+            background-color: #383838; 
+        }
+
+        .input-area, .select-area, #addTaskButton { 
+            background-color: #2c2c2c; 
+            border-color: #4a4a4a; 
+            color: #e0e0e0;
+        }
+        #newTaskInput::placeholder { 
+            color: #888888; 
+        }
+        #addTaskButton:hover { 
+            background-color: #383838; 
+        }
+
+        .dragging { opacity: 0.5; }
+        .drag-over { background-color: #383838; }
+        .week-column.drag-over { background-color: #261d36; }
+        .today-column.drag-over { background-color: #18253d; }
+
+        /* Toggle Switch */
+        .toggle-checkbox { display: none; }
+        .toggle-label {
+            width: 50px; height: 26px; background-color: #5f6368;
+            border-radius: 13px; display: inline-block; position: relative; cursor: pointer;
+        }
+        .toggle-ball {
+            width: 22px; height: 22px; background-color: #e8eaed;
+            border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.3s;
+        }
+        .toggle-checkbox:checked + .toggle-label { background-color: #aecbfa; }
+        .toggle-checkbox:checked + .toggle-label .toggle-ball { transform: translateX(24px); background-color: #174ea6; }
+
+        /* Modo Claro */
+        body.light-theme { background-color: #f0f2f5; color: #1c1e21; }
+        body.light-theme .quadrant { background-color: #ffffff; border-color: #dce1e6; }
+        body.light-theme .week-column { background-color: #f6f0ff; border-color: #dfcbff; }
+        body.light-theme .today-column { background-color: #eef4ff; border-color: #b0cdff; }
+        body.light-theme #do .quadrant-title { color: #d93025; }
+        body.light-theme #decide .quadrant-title { color: #1a73e8; }
+        body.light-theme #delegate .quadrant-title { color: #f9ab00; }
+        body.light-theme #delete .quadrant-title { color: #1e8e3e; }
+        body.light-theme .week-title { color: #7e22ce; }
+        body.light-theme .today-title { color: #005cb2; }
+        body.light-theme .task { background-color: #ffffff; border-color: #dce1e6; color: #1c1e21; }
+        body.light-theme .task:hover { background-color: #f5f6f7; }
+        body.light-theme .input-area, body.light-theme .select-area { background-color: #ffffff; border-color: #dce1e6; color: #1c1e21; }
+        body.light-theme #newTaskInput::placeholder { color: #606770; }
+        body.light-theme #addTaskButton { background-color: #1877f2; color: #ffffff; border-color: #1877f2; }
+        body.light-theme #addTaskButton:hover { background-color: #166fe5; border-color: #166fe5; }
+        body.light-theme .drag-over { background-color: #e7e9ec; }
+        body.light-theme .week-column.drag-over { background-color: #ecdfff; }
+        body.light-theme .today-column.drag-over { background-color: #d0e1ff; }
+        .form-container {
+            margin-bottom: 2rem; padding: 1rem; border-radius: 0.5rem;
+            background-color: #1e1e1e; transition: background-color 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        body.light-theme .form-container { background-color: #ffffff; }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="flex flex-col sm:flex-row justify-between items-center mb-6">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center sm:text-left mb-4 sm:mb-0">Gerenciador de Tarefas - Matriz de Eisenhower</h1>
+            <div class="flex items-center">
+                <span class="mr-2 text-sm">Modo Claro</span>
+                <input type="checkbox" id="lightModeToggle" class="toggle-checkbox">
+                <label for="lightModeToggle" class="toggle-label"><span class="toggle-ball"></span></label>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <h2 class="text-xl font-semibold mb-3">Adicionar Nova Tarefa</h2>
+            <div class="flex flex-col sm:flex-row gap-2 items-start">
+                <textarea id="newTaskInput" placeholder="Digite uma tarefa ou cole uma lista (uma por linha)..." rows="2" class="input-area flex-grow p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none overflow-y-hidden h-[46px] w-full sm:w-auto"></textarea>
+                
+                <select id="targetQuadrantSelect" class="select-area p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none cursor-pointer w-full sm:w-auto">
+                    <option value="do">Urgente, Importante</option>
+                    <option value="decide">Importante, não urgente</option>
+                    <option value="delegate">Extra, importante</option>
+                    <option value="delete">Ideias futuras</option>
+                    <option value="week">Week</option>
+                    <option value="today">Today</option>
+                </select>
+
+                <button id="addTaskButton" class="font-semibold py-2.5 px-4 rounded-md transition-colors duration-150 border whitespace-nowrap w-full sm:w-auto">
+                    Adicionar Tarefa
+                </button>
+            </div>
+             <p id="error-message" class="text-red-500 text-sm mt-2 font-medium hidden"></p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+            
+            <div class="lg:col-span-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div id="do" class="quadrant">
+                    <h2 class="quadrant-title text-lg font-bold mb-3">Urgente, Importante</h2>
+                    <div class="task-list space-y-2 min-h-[100px]"></div>
+                </div>
+                <div id="decide" class="quadrant">
+                    <h2 class="quadrant-title text-lg font-bold mb-3">Importante, não urgente</h2>
+                    <div class="task-list space-y-2 min-h-[100px]"></div>
+                </div>
+                <div id="delegate" class="quadrant">
+                    <h2 class="quadrant-title text-lg font-bold mb-3">Extra, importante</h2>
+                    <div class="task-list space-y-2 min-h-[100px]"></div>
+                </div>
+                <div id="delete" class="quadrant">
+                    <h2 class="quadrant-title text-lg font-bold mb-3">Ideias futuras</h2>
+                    <div class="task-list space-y-2 min-h-[100px]"></div>
+                </div>
+            </div>
+
+            <div id="week" class="lg:col-span-3 week-column h-full">
+                <h2 class="week-title text-lg font-bold mb-3 flex items-center gap-2">
+                    <span>📅 Week</span>
+                </h2>
+                <div class="task-list space-y-2 min-h-[440px]"></div>
+            </div>
+
+            <div id="today" class="lg:col-span-3 today-column h-full">
+                <h2 class="today-title text-lg font-bold mb-3 flex items-center gap-2">
+                    <span>📅 Today</span>
+                </h2>
+                <div class="task-list space-y-2 min-h-[440px]"></div>
+            </div>
+        </div>
+    </div>
+
+   <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightModeToggle = document.getElementById('lightModeToggle');
+            const body = document.body;
+            const newTaskInput = document.getElementById('newTaskInput');
+            const targetQuadrantSelect = document.getElementById('targetQuadrantSelect');
+            const addTaskButton = document.getElementById('addTaskButton');
+            const containers = document.querySelectorAll('.quadrant, .week-column, .today-column');
+            const errorMessage = document.getElementById('error-message');
+            let draggedTask = null;
+
+            loadThemePreference();
+            loadTasks();
+
+            lightModeToggle.addEventListener('change', () => {
+                body.classList.toggle('light-theme');
+                localStorage.setItem('themePreference', body.classList.contains('light-theme') ? 'light' : 'dark');
+            });
+
+            function loadThemePreference() {
+                if (localStorage.getItem('themePreference') === 'light') {
+                    body.classList.add('light-theme');
+                    lightModeToggle.checked = true;
+                }
+            }
+
+            function autoResizeInput() {
+                newTaskInput.style.height = 'auto';
+                newTaskInput.style.height = newTaskInput.scrollHeight + 'px';
+            }
+            newTaskInput.addEventListener('input', autoResizeInput);
+
+            function showMsgError(msg) {
+                errorMessage.textContent = msg;
+                errorMessage.classList.remove('hidden');
+            }
+
+            function hideMsgError() {
+                errorMessage.classList.add('hidden');
+            }
+
+            function taskTextExistsInQuadrants(text, excludeTaskId = null) {
+                const quadrants = document.querySelectorAll('.quadrant .task-text');
+                for (let span of quadrants) {
+                    if (span.textContent.trim().toLowerCase() === text.trim().toLowerCase()) {
+                        const taskEl = span.closest('.task');
+                        if (!excludeTaskId || taskEl.getAttribute('data-task-id') !== excludeTaskId) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            function taskTextExistsInWeek(text, excludeTaskId = null) {
+                const weekTasks = document.querySelectorAll('#week .task-text');
+                for (let span of weekTasks) {
+                    if (span.textContent.trim().toLowerCase() === text.trim().toLowerCase()) {
+                        const taskEl = span.closest('.task');
+                        if (!excludeTaskId || taskEl.getAttribute('data-task-id') !== excludeTaskId) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            function taskTextExistsInToday(text, excludeTaskId = null) {
+                const todayTasks = document.querySelectorAll('#today .task-text');
+                for (let span of todayTasks) {
+                    if (span.textContent.trim().toLowerCase() === text.trim().toLowerCase()) {
+                        const taskEl = span.closest('.task');
+                        if (!excludeTaskId || taskEl.getAttribute('data-task-id') !== excludeTaskId) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            addTaskButton.addEventListener('click', () => {
+                const taskText = newTaskInput.value.trim();
+                if (taskText) {
+                    const selectedId = targetQuadrantSelect.value;
+                    const targetList = document.querySelector(`#${selectedId} .task-list`);
+                    const lines = taskText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                    
+                    let hasDuplicate = false;
+                    lines.forEach(line => {
+                        if (selectedId === 'today') {
+                            if (taskTextExistsInToday(line)) hasDuplicate = true;
+                        } else if (selectedId === 'week') {
+                            if (taskTextExistsInWeek(line)) hasDuplicate = true;
+                        } else {
+                            if (taskTextExistsInQuadrants(line)) hasDuplicate = true;
+                        }
+                    });
+
+                    if (hasDuplicate) {
+                        showMsgError("Tarefa já inserida");
+                        return;
+                    }
+
+                    hideMsgError();
+                    
+                    lines.forEach(line => {
+                        createTaskElement(line, targetList, `id-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`);
+                    });
+                    
+                    newTaskInput.value = '';
+                    newTaskInput.style.height = '46px';
+                    saveTasks();
+                } else {
+                    showMsgError("Por favor, insira um nome para a tarefa.");
+                }
+            });
+            
+            newTaskInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    addTaskButton.click();
+                }
+            });
+
+            function createTaskElement(text, targetList, taskId) {
+                if (targetList.querySelector(`[data-task-id="${taskId}"]`)) return;
+
+                const task = document.createElement('div');
+                task.classList.add('task');
+                task.setAttribute('data-task-id', taskId); 
+                task.draggable = true;
+
+                const textSpan = document.createElement('span');
+                textSpan.classList.add('task-text', 'flex-grow', 'cursor-text', 'pr-2');
+                textSpan.textContent = text;
+
+                textSpan.addEventListener('click', () => {
+                    const currentText = textSpan.textContent;
+                    const editInput = document.createElement('input');
+                    editInput.type = 'text';
+                    editInput.value = currentText;
+                    editInput.classList.add('p-1', 'rounded', 'border', 'bg-transparent', 'text-inherit', 'w-full', 'outline-none', 'focus:ring-1', 'focus:ring-blue-500');
+                    
+                    task.draggable = false;
+                    task.replaceChild(editInput, textSpan);
+                    editInput.focus();
+
+                    const finishEdit = () => {
+                        const updatedText = editInput.value.trim();
+                        
+                        if (updatedText === currentText) {
+                            if (task.contains(editInput)) {
+                                task.replaceChild(textSpan, editInput);
+                            }
+                            task.draggable = true;
+                            hideMsgError();
+                            return;
+                        }
+
+                        if (updatedText) {
+                            const existsInQ = taskTextExistsInQuadrants(updatedText, taskId);
+                            const existsInW = taskTextExistsInWeek(updatedText, taskId);
+                            const existsInT = taskTextExistsInToday(updatedText, taskId);
+                            
+                            if (existsInQ || existsInW || existsInT) {
+                                showMsgError("Tarefa já inserida");
+                                if (task.contains(editInput)) {
+                                    task.replaceChild(textSpan, editInput);
+                                }
+                                task.draggable = true;
+                                return;
+                            }
+                            
+                            hideMsgError();
+                            textSpan.textContent = updatedText;
+
+                            // Sincroniza todas as cópias com o mesmo ID (Matriz, Semana e Hoje)
+                            document.querySelectorAll(`[data-task-id="${taskId}"]`).forEach(el => {
+                                const span = el.querySelector('.task-text');
+                                if (span) span.textContent = updatedText;
+                                
+                                const openInput = el.querySelector('input');
+                                if (openInput && el !== task) {
+                                    el.replaceChild(span, openInput);
+                                    el.draggable = true;
+                                }
+                            });
+                            
+                            if (task.contains(editInput)) {
+                                task.replaceChild(textSpan, editInput);
+                            }
+                            task.draggable = true;
+                            saveTasks();
+                        } else {
+                            document.querySelectorAll(`[data-task-id="${taskId}"]`).forEach(el => el.remove());
+                            hideMsgError();
+                            saveTasks();
+                        }
+                    };
+
+                    editInput.addEventListener('blur', finishEdit);
+                    editInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') finishEdit(); });
+                });
+
+                const removeButton = document.createElement('button');
+                removeButton.innerHTML = '&times;';
+                removeButton.classList.add('text-red-500', 'hover:text-red-700', 'font-bold', 'ml-2', 'px-1', 'rounded', 'flex-shrink-0');
+                removeButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    document.querySelectorAll(`[data-task-id="${taskId}"]`).forEach(el => el.remove());
+                    hideMsgError();
+                    saveTasks();
+                });
+
+                task.appendChild(textSpan);
+                task.appendChild(removeButton);
+                targetList.appendChild(task);
+                addDragEventsToTask(task);
+                return task;
+            }
+
+            function addDragEventsToTask(task) {
+                task.addEventListener('dragstart', (e) => {
+                    if (e.target.tagName === 'INPUT') {
+                        e.preventDefault();
+                        return;
+                    }
+                    draggedTask = e.currentTarget;
+                    e.dataTransfer.setData('text/plain', task.getAttribute('data-task-id'));
+                    const parentContainer = task.closest('.quadrant, .week-column, .today-column');
+                    e.dataTransfer.setData('source-container', parentContainer ? parentContainer.id : '');
+                    setTimeout(() => e.target.classList.add('dragging'), 0);
+                });
+
+                task.addEventListener('dragend', (e) => {
+                    e.target.classList.remove('dragging');
+                    draggedTask = null;
+                    saveTasks();
+                });
+            }
+
+            containers.forEach(container => {
+                const taskList = container.querySelector('.task-list');
+
+                container.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    container.classList.add('drag-over');
+                });
+
+                container.addEventListener('dragleave', () => container.classList.remove('drag-over'));
+
+                container.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    container.classList.remove('drag-over');
+                    
+                    const taskId = e.dataTransfer.getData('text/plain');
+                    const sourceContainerId = e.dataTransfer.getData('source-container');
+                    const targetContainerId = container.id;
+
+                    if (!draggedTask) return;
+
+                    const taskText = draggedTask.querySelector('.task-text').textContent.trim();
+                    const isSchedule = (id) => ['week', 'today'].includes(id);
+
+                    if (isSchedule(targetContainerId)) {
+                        if (sourceContainerId !== targetContainerId) {
+                            const exists = targetContainerId === 'today' ? taskTextExistsInToday(taskText) : taskTextExistsInWeek(taskText);
+                            if (exists) {
+                                showMsgError("Tarefa já inserida");
+                                return;
+                            }
+                            hideMsgError();
+                            
+                            if (isSchedule(sourceContainerId)) {
+                                // Mover fisicamente se estiver transitando entre Semana e Hoje
+                                taskList.appendChild(draggedTask);
+                            } else {
+                                // Clonar se estiver vindo dos quadrantes da matriz
+                                createTaskElement(taskText, taskList, taskId);
+                            }
+                        }
+                    } else {
+                        // Alvo é um Quadrante Mestre
+                        if (sourceContainerId !== targetContainerId) {
+                            if (isSchedule(sourceContainerId)) {
+                                if (taskTextExistsInQuadrants(taskText)) {
+                                    showMsgError("Tarefa já inserida");
+                                    return;
+                                }
+                            } else {
+                                if (taskTextExistsInQuadrants(taskText, taskId)) {
+                                    showMsgError("Tarefa já inserida");
+                                    return;
+                                }
+                            }
+                            hideMsgError();
+                            taskList.appendChild(draggedTask);
+                        }
+                    }
+                    saveTasks();
+                });
+            });
+
+            function saveTasks() {
+                const data = { today: [], week: [] };
+                document.querySelectorAll('.quadrant').forEach(q => {
+                    data[q.id] = [];
+                    q.querySelectorAll('.task-list .task').forEach(t => {
+                        data[q.id].push({ id: t.getAttribute('data-task-id'), text: t.querySelector('.task-text').textContent });
+                    });
+                });
+                document.querySelectorAll('#week .task-list .task').forEach(t => {
+                    data.week.push({ id: t.getAttribute('data-task-id'), text: t.querySelector('.task-text').textContent });
+                });
+                document.querySelectorAll('#today .task-list .task').forEach(t => {
+                    data.today.push({ id: t.getAttribute('data-task-id'), text: t.querySelector('.task-text').textContent });
+                });
+                localStorage.setItem('eisenhowerTasks_v3', JSON.stringify(data));
+            }
+
+            function loadTasks() {
+                const saved = JSON.parse(localStorage.getItem('eisenhowerTasks_v3'));
+                if (!saved) return;
+                Object.keys(saved).forEach(id => {
+                    const box = document.getElementById(id);
+                    if (box) {
+                        const list = box.querySelector('.task-list');
+                        saved[id].forEach(t => createTaskElement(t.text, list, t.id));
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
