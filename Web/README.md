@@ -5,6 +5,8 @@ Aqui estão alguns dos sites que desenvolvi com HTML, CSS e JavaScript, utilizan
 ---
 
 ## 📊 Dashboard Financeiro
+<img width="1427" height="885" alt="image" src="https://github.com/user-attachments/assets/bcb5bf24-f880-4754-acda-7ed037fd8306" />
+
 <img width="1911" height="874" alt="image" src="https://github.com/user-attachments/assets/9d8f206d-3477-4733-960c-dc9ffc0c3505" />
 
 Um painel simples e funcional para controle de finanças pessoais.  
