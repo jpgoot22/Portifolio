@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eurotrip 2026 - Irlanda & Londres</title>
+    
+    <style>
+        /* Variáveis de Cor (Dark Theme Moderno) */
+        :root {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --primary: #10b981;
+            --primary-hover: #059669;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            
+            /* Cores de Alerta */
+            --alert-atencao: #ef5350;
+            --alert-dica: #ffca28;
+            --alert-transporte: #42a5f5;
+            --alert-clima: #26c6da;
+            --alert-reserva: #ab47bc;
+
+            /* Cores de Dificuldade */
+            --diff-leve: #10b981;
+            --diff-moderado: #f59e0b;
+            --diff-moderado-alto: #f97316;
+            --diff-alto: #ef4444;
+        }
+
+        /* Reset Geral */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            transition: outline 0.3s;
+        }
+
+        /* Indicador visual de quando o modo de edição está ativo */
+        body[contenteditable="true"] {
+            outline: 3px dashed var(--primary);
+            outline-offset: -5px;
+            background-color: #0d1425;
+        }
+
+        /* Cabeçalho Principal */
+        header { 
+            text-align: center; 
+            margin-bottom: 24px; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%); 
+            border: 1px solid #047857; 
+            border-radius: 10px; 
+        }
+        header h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+        header p { color: #a7f3d0; font-size: 1rem; }
+        .meta-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }
+        .badge { background-color: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; }
+
+        /* Abas (Tabs) */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { background-color: var(--bg-card-hover); }
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: var(--primary); margin: 30px 0 15px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+        h3 { color: var(--primary); margin: 20px 0 10px 0; font-size: 1.2em; }
+
+        /* Tabelas Gerais */
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9em; }
+        th, td { padding: 10px; border: 1px solid var(--border-color); text-align: left; }
+        th { background-color: rgba(255,255,255,0.05); color: var(--primary); }
+
+        /* LAYOUT DOS CARDS */
+        .roteiro-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+        @media (min-width: 768px) { .roteiro-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .roteiro-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-bottom: 20px; 
+        }
+
+        .roteiro-grid .card { margin-bottom: 0; }
+
+        .card-header {
+            padding: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .card-header:hover { background-color: var(--bg-card-hover); }
+        .card-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .card-title { font-size: 1.1em; font-weight: bold; color: #fff; display: flex; align-items: center; }
+        .toggle-icon { transition: transform 0.3s ease; font-size: 0.8em; background: var(--bg-body); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        
+        .info-rapida { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.8em; color: var(--text-muted); }
+        .info-rapida span { background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 6px; display: inline-flex; align-items: center; }
+
+        .card-content {
+            max-height: 0;
+            opacity: 0;
+            padding: 0 16px;
+            background-color: var(--bg-body);
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+        }
+        
+        .card.active .toggle-icon { transform: rotate(180deg); background: var(--primary); color: #000; }
+        .card.active .card-content { 
+            max-height: 4000px;
+            opacity: 1;
+            padding: 16px;
+            border-top: 1px solid var(--border-color); 
+        }
+
+        .secao { margin: 15px 0; }
+        .secao h4 { font-size: 1em; color: var(--primary); margin-bottom: 8px; }
+        .secao p { font-size: 0.9em; margin-bottom: 8px; color: #cbd5e1; }
+        .secao ul { padding-left: 20px; font-size: 0.9em; color: #cbd5e1; margin-bottom: 8px; }
+        .secao ul li { margin-bottom: 4px; }
+
+        .box { padding: 10px 12px; margin: 12px 0; border-radius: 0 6px 6px 0; border-left: 4px solid; background: rgba(255, 255, 255, 0.03); font-size: 0.85em; color: #e2e8f0; }
+        .box strong { display: block; margin-bottom: 4px; font-size: 1.05em; }
+        .box.atencao { border-color: var(--alert-atencao); background: rgba(239, 83, 80, 0.1); }
+        .box.dica { border-color: var(--alert-dica); }
+        .box.transporte { border-color: var(--alert-transporte); background: rgba(66, 165, 245, 0.1); }
+        .box.reserva { border-color: var(--alert-reserva); background: rgba(171, 71, 188, 0.1); }
+
+        /* Timeline Panorama */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
+        .timeline::after { content: ''; position: absolute; width: 2px; background: var(--border-color); top: 0; bottom: 0; left: 20px; }
+        .t-item { padding: 10px 0 20px 50px; position: relative; }
+        .t-item::after { content: ''; position: absolute; width: 16px; height: 16px; right: auto; left: 13px; top: 15px; background: var(--bg-body); border: 3px solid var(--primary); border-radius: 50%; z-index: 1; }
+        .t-date { font-weight: bold; color: var(--primary); display: block; margin-bottom: 5px; }
+        .t-content { background: var(--bg-card); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .t-content h3 { font-size: 1.1em; color: #fff; margin-bottom: 5px; }
+        .t-content p { font-size: 0.9em; color: var(--text-muted); }
+
+        /* Area de Botoes de Ação */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn-action {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn-action:hover { transform: scale(1.05); }
+
+        .btn-edit { background-color: var(--alert-dica); color: #000; }
+        .btn-reset { background-color: rgba(239, 83, 80, 0.2); color: var(--alert-atencao); border: 1px solid var(--alert-atencao); }
+        .btn-reset:hover { background-color: var(--alert-atencao); color: #fff; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌍 Eurotrip 2026</h1>
+        <p>Irlanda & Londres</p>
+        <div class="meta-badges">
+            <span class="badge">👥 7 Adultos</span>
+            <span class="badge">📅 04/09 a 13/09</span>
+        </div>
+    </header>
+
+    <div class="tab-container" contenteditable="false">
+        <button class="tab-btn active" onclick="openTab('irlanda')">🇮🇪 Irlanda (Cork)</button>
+        <button class="tab-btn" onclick="openTab('londres')">🇬🇧 Londres</button>
+        <button class="tab-btn" onclick="openTab('panorama')">✈️ Panorama Completo</button>
+    </div>
+
+    <!-- PAINEL DE AÇÕES -->
+    <div class="action-buttons" contenteditable="false">
+        <button id="btn-edit-global" class="btn-action btn-edit">✏️ Editar Roteiro</button>
+        <button id="btn-reset-global" class="btn-action btn-reset" onclick="resetData()">🔄 Restaurar Padrão</button>
+    </div>
+
+ 
+<div id="irlanda" class="tab-content active">
+    
+    <h2>Itinerário Diário: Base em Cork</h2>
+    
+    <div class="roteiro-grid" style="margin-bottom: 40px;">
+
+        <!-- DIA 1 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
+                    <span class="card-title">📅 Dia 1 (04/09): Chegada + Cork</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="info-rapida">
+                    <span>🚶 A pé</span>
+                    <span>⭐ Muito Leve</span>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="secao">
+                    <h4>Por que visitar?</h4>
+                    <p>Primeiro dia pensado para chegar sem pressa, descansar na casa e começar a viagem de forma tranquila. À noite, vale sair para conhecer o centro de Cork, jantar e aproveitar um pub com música ao vivo.</p>
+                </div>
+
+                <div class="secao">
+                    <h4>Cronograma</h4>
+                    <table>
+                        <tbody>
+                            <tr><td>15:00</td><td>Chegada à casa, check-in e descanso</td></tr>
+                            <tr><td>17:30</td><td>Saída tranquila para o centro de Cork</td></tr>
+                            <tr><td>18:00</td><td>St. Patrick's Street e centro histórico</td></tr>
+                            <tr><td>19:00</td><td>Caminhada às margens do River Lee</td></tr>
+                            <tr><td>20:00</td><td>Jantar</td></tr>
+                            <tr><td>21:30</td><td>Pub com música ao vivo 🎶</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box">
+                    <strong>💡 Dica</strong>
+                    Não marque nada obrigatório para esse dia. Se estiverem cansados da viagem, podem simplesmente jantar e voltar para descansar.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- DIA 2 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
+                    <span class="card-title">📅 Dia 2 (05/09): Cork</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="info-rapida">
+                    <span>🚶 A pé</span>
+                    <span>⭐⭐ Leve</span>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="secao">
+                    <h4>Por que visitar?</h4>
+                    <p>Dia dedicado a conhecer Cork com calma. A cidade mistura arquitetura histórica, mercados tradicionais, igrejas, cafés, lojas e o charme do River Lee.</p>
+                </div>
+
+                <div class="secao">
+                    <h4>Cronograma</h4>
+                    <table>
+                        <tbody>
+                            <tr><td>09:00</td><td>English Market — Queijos, Brown Bread e produtos locais</td></tr>
+                            <tr><td>10:30</td><td>St. Fin Barre's Cathedral</td></tr>
+                            <tr><td>11:45</td><td>Elizabeth Fort</td></tr>
+                            <tr><td>13:00</td><td>Almoço no centro</td></tr>
+                            <tr><td>14:30</td><td>Shandon Bells & Tower — Tocar os sinos</td></tr>
+                            <tr><td>16:00</td><td>St. Patrick's Street — Compras e cafés</td></tr>
+                            <tr><td>17:00</td><td>Fitzgerald Park</td></tr>
+                            <tr><td>18:00</td><td>Caminhada às margens do River Lee</td></tr>
+                            <tr><td>19:30</td><td>Jantar</td></tr>
+                            <tr><td>21:00</td><td>Pub com música ao vivo 🎶</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box">
+                    <strong>💡 Dica</strong>
+                    Esse é o dia para conhecer Cork sem pressa. Se algum passeio não der tempo, não tem problema — vocês terão outra oportunidade de passar pelo centro durante a viagem.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- DIA 3 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
+                    <span class="card-title">📅 Dia 3 (06/09): Cobh + Blarney</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="info-rapida">
+                    <span>🚆 Trem + 🚍 Ônibus</span>
+                    <span>⭐⭐ Moderado</span>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="secao">
+                    <h4>Por que visitar?</h4>
+                    <p>Cobh combina história marítima, o legado do Titanic, casas coloridas e uma das catedrais mais impressionantes da região. À tarde, Blarney traz castelo, jardins e a famosa Pedra da Eloquência.</p>
+                </div>
+
+                <div class="secao">
+                    <h4>Cronograma</h4>
+                    <table>
+                        <tbody>
+                            <tr><td>08:30</td><td>Trem saindo da Kent Station para Cobh</td></tr>
+                            <tr><td>09:00</td><td>Titanic Experience</td></tr>
+                            <tr><td>11:00</td><td>Deck of Cards e caminhada pelo centro</td></tr>
+                            <tr><td>12:00</td><td>St. Colman's Cathedral</td></tr>
+                            <tr><td>12:45</td><td>Almoço em Cobh</td></tr>
+                            <tr><td>13:45</td><td>Retorno para Cork</td></tr>
+                            <tr><td>14:30</td><td>Saída para Blarney</td></tr>
+                            <tr><td>15:00</td><td>Blarney Castle & Gardens</td></tr>
+                            <tr><td>17:30</td><td>Retorno para Cork</td></tr>
+                            <tr><td>Noite</td><td>Jantar e noite livre</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box reserva">
+                    <strong>🎟 Reservar Antecipado</strong>
+                    Titanic Experience e, se possível, ingresso para Blarney Castle.
+                </div>
+
+                <div class="box">
+                    <strong>💡 Dica</strong>
+                    Em Cobh, priorizem Titanic Experience, St. Colman's Cathedral e Deck of Cards. Se Cobh estiver tomando mais tempo que o previsto, reduzam o tempo de caminhada pelo porto, cafés e lojinhas para não comprometer Blarney.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- DIA 4 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
+                    <span class="card-title">📅 Dia 4 (07/09): Cliffs of Moher</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="info-rapida">
+                    <span>🚌 Excursão organizada</span>
+                    <span>⭐⭐⭐ Cansativo</span>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="secao">
+                    <h4>Por que visitar?</h4>
+                    <p>As Cliffs of Moher são uma das paisagens mais famosas da Irlanda. O ideal é fazer esse bate-volta com excursão organizada, evitando o desgaste de dirigir por muitas horas.</p>
+                </div>
+
+                <div class="secao">
+                    <h4>Cronograma (Bate-volta)</h4>
+                    <table>
+                        <tbody>
+                            <tr><td>07:00</td><td>Saída de Cork — Preferência por excursão organizada</td></tr>
+                            <tr><td>10:30</td><td>Chegada às Cliffs of Moher</td></tr>
+                            <tr><td>11:00</td><td>Caminhada pelos mirantes e trilhas</td></tr>
+                            <tr><td>12:30</td><td>Visitor Centre e tempo para fotos</td></tr>
+                            <tr><td>13:30</td><td>Almoço na região</td></tr>
+                            <tr><td>14:30</td><td>Passeio por vilas e paisagens do Condado de Clare</td></tr>
+                            <tr><td>16:30</td><td>Início do retorno para Cork</td></tr>
+                            <tr><td>20:00</td><td>Chegada aproximada em Cork</td></tr>
+                            <tr><td>20:30</td><td>Jantar e descanso</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box">
+                    <strong>💡 Dica</strong>
+                    Esse será um dos dias mais cansativos. Evitem marcar outro passeio importante à noite. Aproveitem para jantar e descansar.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- DIA 5 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
+                    <span class="card-title">📅 Dia 5 (08/09): Killarney</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="info-rapida">
+                    <span>🚆 Trem / 🚗 Carro</span>
+                    <span>⭐⭐⭐ Cansativo</span>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="secao">
+                    <h4>Por que visitar?</h4>
+                    <p>O Parque Nacional de Killarney reúne lagos, montanhas, castelos, florestas e algumas das paisagens mais bonitas da Irlanda. É um dos grandes cartões-postais da viagem.</p>
+                </div>
+
+                <div class="secao">
+                    <h4>Cronograma</h4>
+                    <table>
+                        <tbody>
+                            <tr><td>07:30</td><td>Saída de Cork — Trem ou carro</td></tr>
+                            <tr><td>09:00</td><td>Killarney National Park</td></tr>
+                            <tr><td>10:30</td><td>Ross Castle</td></tr>
+                            <tr><td>12:00</td><td>Muckross House & Gardens</td></tr>
+                            <tr><td>13:30</td><td>Almoço no centro de Killarney</td></tr>
+                            <tr><td>15:00</td><td>Muckross Abbey</td></tr>
+                            <tr><td>16:30</td><td>Passeio pelo centro, cafés e música</td></tr>
+                            <tr><td>18:00</td><td>Retorno para Cork</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box">
+                    <strong>🚗 Dica de Locomoção</strong>
+                    Se forem de carro, tentem incluir Torc Waterfall e Ladies View. O Gap of Dunloe também é uma ótima opção, mas pode deixar o dia corrido.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- DIA 6 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
+                    <span class="card-title">📅 Dia 6 (09/09): Kinsale</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="info-rapida">
+                    <span>🚌 Ônibus / 🚗 Carro</span>
+                    <span>⭐⭐ Leve/Moderado</span>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="secao">
+                    <h4>Por que visitar?</h4>
+                    <p>Kinsale é uma charmosa cidade costeira conhecida pelas ruas coloridas, porto, restaurantes e atmosfera tranquila. É um ótimo lugar para encerrar a viagem sem pressa.</p>
+                </div>
+
+                <div class="secao">
+                    <h4>Cronograma</h4>
+                    <table>
+                        <tbody>
+                            <tr><td>09:00</td><td>Saída de Cork</td></tr>
+                            <tr><td>09:45</td><td>Chegada a Kinsale e passeio pelo centro histórico</td></tr>
+                            <tr><td>10:30</td><td>Ruas coloridas, lojas e cafés</td></tr>
+                            <tr><td>11:30</td><td>Charles Fort</td></tr>
+                            <tr><td>13:00</td><td>Almoço em Kinsale</td></tr>
+                            <tr><td>14:30</td><td>Caminhada pelo porto</td></tr>
+                            <tr><td>15:30</td><td>Cafés, pubs e tempo livre</td></tr>
+                            <tr><td>17:00</td><td>Retorno para Cork</td></tr>
+                            <tr><td>18:00</td><td>Última caminhada ou compras em Cork</td></tr>
+                            <tr><td>19:30</td><td>Último jantar da viagem</td></tr>
+                            <tr><td>21:00</td><td>Pub com música ao vivo 🎶</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box">
+                    <strong>💡 Dica</strong>
+                    Não tentem preencher cada minuto. Kinsale é um lugar para caminhar sem pressa, comer bem e aproveitar o ambiente. Como é o último dia, deixem a noite mais tranquila para curtir o encerramento da viagem.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ABA LONDRES -->
+    <div id="londres" class="tab-content">
+        
+        <h2>Itinerário Diário: Londres (3 Dias)</h2>
+
+        <div class="roteiro-grid" style="margin-bottom: 40px;">
+            <div class="card">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div class="card-title-row">
+                        <span class="card-title">📅 Dia 1 (11/09): O Coração Real, West End e Mirantes</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="info-rapida">
+                        <span>🚶 Quase todo a pé</span>
+                        <span>⭐⭐ Moderado</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="secao">
+                        <h4>Por que visitar?</h4>
+                        <p>Explore os principais monumentos políticos e reais de Londres, caminhe por parques históricos e aproveite os horários agendados nos mirantes panorâmicos.</p>
+                    </div>
+
+                    <div class="secao">
+                        <h4>Cronograma</h4>
+                        <table>
+                            <tbody>
+                                <tr><td>09:00</td><td>Big Ben e Parlamento (40 min) - Metrô Westminster. Ótimo para fotos da ponte (Apenas por fora)</td></tr>
+                                <tr><td>09:45</td><td>Westminster Abbey (20 min) - Caminhada de 4min. Ver por fora a arquitetura gótica</td></tr>
+                                <tr><td>10:10</td><td>St James's Park (40 min) - Caminhada de 5min. Esquilos, lago e ponte azul</td></tr>
+                                <tr><td>10:55</td><td>Buckingham Palace (1h) - Troca da Guarda às 11:00. Fique nos degraus do Victoria Memorial</td></tr>
+                                <tr><td>12:00</td><td>Almoço rápido em Covent Garden (1h) - Mercado coberto e artistas de rua</td></tr>
+                                <tr><td>13:15</td><td>Deslocamento para a região financeira (45 min)</td></tr>
+                                <tr><td>14:00</td><td>Horizon 22 (1h) - Vista panorâmica espetacular da cidade (Agendado às 14:00)</td></tr>
+                                <tr><td>15:15</td><td>Caminhada até o The Lookout (15 min)</td></tr>
+                                <tr><td>16:00</td><td>The Lookout (1h) - Mirante panorâmico no topo (Agendado às 16:00)</td></tr>
+                                <tr><td>17:30</td><td>Piccadilly Circus e Chinatown (1h30) - Painéis luminosos e letreiros. Prove doces chineses nas padarias</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div class="card-title-row">
+                        <span class="card-title">📅 Dia 2 (12/09): Southbank, Pontes e Grandes Museus</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="info-rapida">
+                        <span>🚶 River Walk e Metrô</span>
+                        <span>⭐ Moderado</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="secao">
+                        <h4>Por que visitar?</h4>
+                        <p>Conecte-se com a história ribeirinha de Londres, visite o famoso mercado gastronômico e aproveite os museus científicos e de história natural agendados.</p>
+                    </div>
+
+                    <div class="secao">
+                        <h4>Cronograma</h4>
+                        <table>
+                            <tbody>
+                                <tr><td>09:00</td><td>Tower Bridge e Tâmisa (1h) - Metrô Tower Hill. Atravesse a ponte a pé gratuitamente</td></tr>
+                                <tr><td>10:15</td><td>Natural History Museum (2h) - Esqueleto de baleia, dinossauros e fósseis (Agendado às 10:30)</td></tr>
+                                <tr><td>12:30</td><td>Borough Market (1h30) - Almoço na famosa feira gastronômica</td></tr>
+                                <tr><td>14:10</td><td>Deslocamento para o Science Museum (20 min)</td></tr>
+                                <tr><td>14:30</td><td>Science Museum (2h) - Galerias interativas, tecnologias e exploração espacial (Agendado às 14:30)</td></tr>
+                                <tr><td>16:45</td><td>Millennium Bridge e Tate Modern (1h) - Ponte "do Harry Potter" e visita rápida à galeria gratuita</td></tr>
+                                <tr><td>18:00</td><td>St Paul's Cathedral (30 min) - Descansar nos jardins e apreciar a arquitetura por fora</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div class="card-title-row">
+                        <span class="card-title">📅 Dia 3 (13/09): Arte, Compras na Oxford Street e Notting Hill</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="info-rapida">
+                        <span>🚇 Metrô/Ônibus/Pé</span>
+                        <span>⭐ Moderado</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="secao">
+                        <h4>Por que visitar?</h4>
+                        <p>Aproveite tesouros artísticos mundiais, faça um passeio imperdível de meio período de compras e cultura na Oxford Street e encante-se com Notting Hill.</p>
+                    </div>
+
+                    <div class="secao">
+                        <h4>Cronograma</h4>
+                        <table>
+                            <tbody>
+                                <tr><td>10:00</td><td>National Gallery (1h30) - Pinturas de grandes mestres em Trafalgar Square (Agendado às 10:30)</td></tr>
+                                <tr><td>11:45</td><td>Almoço rápido na região central (1h15)</td></tr>
+                                <tr><td>13:15</td><td>Deslocamento para o British Museum (15 min)</td></tr>
+                                <tr><td>14:00</td><td>British Museum (2h30) - Pedra de Roseta e antiguidades globais (Agendado às 14:00)</td></tr>
+                                <tr><td>16:30</td><td>Oxford Street e Arredores (2h30) - Caminhada de compras e exploração de pontos de interesse imperdíveis (Selfridges, a arquitetura da Liberty London e a charmosa Carnaby Street)</td></tr>
+                                <tr><td>19:00</td><td>Notting Hill e Portobello Road (1h) - Encerramento do dia pelas casinhas coloridas e atmosfera charmosa</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+    </div>
+
+    <!-- ABA PANORAMA COMPLETO -->
+<div id="panorama" class="tab-content">
+    <h2>Visão Detalhada da Viagem</h2>
+    <p style="margin-bottom: 20px; color: var(--text-muted);">Um detalhamento macro e logístico do que será feito dia a dia, juntando os roteiros adaptados para 3 dias em Londres.</p>
+
+    <div class="timeline">
+        
+        <div class="t-item">
+            <span class="t-date">04/09 - Chegada na Europa</span>
+            <div class="t-content">
+                <h3>Dia 1: Ambientação em Cork</h3>
+                <p>Chegada na Irlanda por volta das 15h, check-in na casa base em Cork e descanso. No fim da tarde, faremos uma caminhada leve pelo centro da cidade, passando pela St. Patrick's Street e pelas margens do River Lee. À noite, vamos jantar em um pub irlandês e aproveitar a música ao vivo, sem comprometer o descanso após a viagem.</p>
+            </div>
+        </div>
+        
+        <div class="t-item">
+            <span class="t-date">05/09</span>
+            <div class="t-content">
+                <h3>Dia 2: Cork com Calma</h3>
+                <p>Dia inteiro dedicado a explorar Cork sem pressa. Começaremos pelo tradicional English Market, seguindo para a St. Fin Barre's Cathedral e a Elizabeth Fort. À tarde, visitaremos a Shandon Bells & Tower, caminharemos pela St. Patrick's Street e pelo Fitzgerald Park, encerrando o dia às margens do River Lee. À noite, podemos escolher um pub com música ao vivo para aproveitar o clima local.</p>
+            </div>
+        </div>
+
+        <div class="t-item">
+            <span class="t-date">06/09</span>
+            <div class="t-content">
+                <h3>Dia 3: Cobh + Blarney</h3>
+                <p>Pela manhã, pegaremos um trem para a charmosa cidade portuária de Cobh. Visitaremos a Titanic Experience, conheceremos o famoso "Deck of Cards" e admiraremos a St. Colman's Cathedral. Após o almoço, retornaremos a Cork e seguiremos para Blarney, onde exploraremos o castelo medieval, a famosa Pedra da Eloquência e os belos jardins da propriedade. À noite, retorno tranquilo para Cork.</p>
+            </div>
+        </div>
+
+        <div class="t-item">
+            <span class="t-date">07/09</span>
+            <div class="t-content">
+                <h3>Dia 4: As Impressionantes Cliffs of Moher</h3>
+                <p>Prepare-se para conhecer um dos cenários mais espetaculares da Irlanda: as famosas Cliffs of Moher. Passaremos o dia explorando os enormes penhascos à beira do Oceano Atlântico, com vistas incríveis e trilhas pelos principais mirantes. A viagem será feita preferencialmente em excursão organizada, passando também por paisagens e vilas do Condado de Clare. Será um dia dedicado às paisagens dramáticas da costa oeste da Irlanda, com bastante tempo para fotos e contemplação. No retorno a Cork, a noite será reservada para jantar e descanso.</p>
+            </div>
+        </div>
+
+        <div class="t-item">
+            <span class="t-date">08/09</span>
+            <div class="t-content">
+                <h3>Dia 5: Natureza em Killarney</h3>
+                <p>Dia dedicado às maravilhas naturais do Parque Nacional de Killarney. Nosso roteiro inclui a exploração das ruínas históricas do Ross Castle às margens do lago, a grandiosa arquitetura e os jardins da Muckross House e a atmosfera das ruínas da Muckross Abbey. Se estivermos de carro, tentaremos incluir também a Torc Waterfall e a Ladies View. Um dia perfeito para muitas fotos, contemplação da natureza e contato com a história.</p>
+            </div>
+        </div>
+
+        <div class="t-item">
+            <span class="t-date">09/09</span>
+            <div class="t-content">
+                <h3>Dia 6: Charme Gastronômico de Kinsale</h3>
+                <p>Deslocamento até Kinsale, uma das cidades costeiras mais charmosas da região e conhecida por sua gastronomia. Começaremos explorando o impressionante Charles Fort e depois teremos tempo para caminhar sem pressa pelas vielas coloridas, lojas de artesanato e pela marina. O dia será mais tranquilo, com almoço focado na culinária local, cafés, pubs e tempo livre para aproveitar a atmosfera da cidade. No fim da tarde, retornaremos a Cork para o último jantar da viagem na Irlanda.</p>
+            </div>
+        </div>
+
+        <div class="t-item">
+            <span class="t-date">11/09</span>
+            <div class="t-content">
+                <h3>Dia 7: O Coração Real, West End e Mirantes em Londres</h3>
+                <p>Voo logo cedo da Irlanda para Londres. Começaremos passando pelos marcos de Westminster (Big Ben, Parlamento, Westminster Abbey e St James's Park) até o Buckingham Palace. Após o almoço em Covent Garden, seguiremos para a região financeira para aproveitar os horários agendados dos mirantes: Horizon 22 (às 14:00) e The Lookout (às 16:00). Encerreremos o dia nas luzes de Piccadilly Circus e Chinatown.</p>
+            </div>
+        </div>
+
+        <div class="t-item">
+            <span class="t-date">12/09</span>
+            <div class="t-content">
+                <h3>Dia 8: Southbank, Pontes e Grandes Museus em Londres</h3>
+                <p>Manhã começando pela Tower Bridge e seguindo para o Natural History Museum (com entrada agendada às 10:30). Depois, almoçaremos no Borough Market e seguiremos para o Science Museum (com entrada agendada às 14:30). Fecharemos o dia cruzando a Millennium Bridge, visitando a Tate Modern e vendo os jardins da St Paul's Cathedral.</p>
+            </div>
+        </div>
+
+        <div class="t-item">
+            <span class="t-date">13/09</span>
+            <div class="t-content">
+                <h3>Dia 9: Arte, Museu Britânico, Oxford Street e Notting Hill</h3>
+                <p>Início do dia com a visita à National Gallery (agendada às 10:30). Em seguida, iremos ao British Museum (agendado às 14:00). No período da tarde, dedicaremos metade do tempo para compras e exploração na Oxford Street e arredores (passando por Selfridges, Liberty London e Carnaby Street), finalizando o dia com um passeio pelas casinhas coloridas de Notting Hill.</p>
+            </div>
+        </div>
+
+        <div class="t-item">
+            <span class="t-date">14/09</span>
+            <div class="t-content">
+                <h3>Dia 10: Retorno ao Brasil</h3>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- SCRIPT GERAL E PERSISTÊNCIA -->
+<script>
+    // Carrega dados salvos do localStorage ao abrir a página
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSavedData();
+    });
+
+    // Função para Salvar Alterações no Navegador
+    function saveData() {
+        const dataToSave = {
+            irlanda: document.getElementById('irlanda').innerHTML,
+            londres: document.getElementById('londres').innerHTML,
+            panorama: document.getElementById('panorama').innerHTML
+        };
+        localStorage.setItem('eurotrip_2026_content', JSON.stringify(dataToSave));
+    }
+
+    // Função para Carregar Conteúdo Salvo
+    function loadSavedData() {
+        const savedData = localStorage.getItem('eurotrip_2026_content');
+        if (savedData) {
+            try {
+                const data = JSON.parse(savedData);
+                if (data.irlanda) document.getElementById('irlanda').innerHTML = data.irlanda;
+                if (data.londres) document.getElementById('londres').innerHTML = data.londres;
+                if (data.panorama) document.getElementById('panorama').innerHTML = data.panorama;
+            } catch (e) {
+                console.error('Erro ao restaurar edições salvas:', e);
+            }
+        }
+    }
+
+    // Função para Resetar para o Roteiro Original
+    function resetData() {
+        if (confirm('Tem certeza que deseja apagar todas as suas edições e voltar ao roteiro original?')) {
+            localStorage.removeItem('eurotrip_2026_content');
+            location.reload();
+        }
+    }
+
+    // Função para Abrir e Fechar os Cards
+    function toggleCard(headerElement) {
+        if (document.body.getAttribute('contenteditable') === 'true') return;
+        const card = headerElement.parentElement;
+        card.classList.toggle('active');
+    }
+
+    // Lógica das Abas Superiores
+    function openTab(tabId) {
+        if (document.body.getAttribute('contenteditable') === 'true') return;
+
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        const btns = document.querySelectorAll('.tab-btn');
+        btns.forEach(btn => btn.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // Lógica do Botão Global de Edição (Editar / Salvar)
+    document.getElementById('btn-edit-global').addEventListener('click', function(e) {
+        const body = document.body;
+        const isEditing = body.getAttribute('contenteditable') === 'true';
+        
+        if (isEditing) {
+            // Desativa Edição e SALVA
+            body.setAttribute('contenteditable', 'false');
+            saveData(); // <--- Grava no localStorage
+            this.innerHTML = '✏️ Editar Roteiro';
+            this.style.backgroundColor = 'var(--alert-dica)';
+            this.style.color = '#000';
+            
+            // Alerta discreto confirmando o salvamento
+            alert('✅ Alterações salvas no seu navegador com sucesso!');
+        } else {
+            // Ativa Edição
+            body.setAttribute('contenteditable', 'true');
+            this.innerHTML = '💾 Salvar Alterações';
+            this.style.backgroundColor = 'var(--primary)';
+            this.style.color = '#fff';
+
+            // Abre todos os cards automaticamente para facilitar a visualização durante a edição
+            document.querySelectorAll('.card').forEach(card => card.classList.add('active'));
+        }
+    });
+</script>
+
+
+</body>
+</html>
