@@ -2,7 +2,9 @@
 
 Aqui estão alguns dos sites que desenvolvi com HTML, CSS e JavaScript, utilizando também Inteligência Artificial como apoio na construção. Todos os projetos têm foco em praticidade, visual intuitivo e usabilidade no navegador — sem necessidade de instalação.
 
-Nota: Todos os dados apresentados nos projetos são fictícios e utilizados exclusivamente para fins ilustrativos e demonstrativos. Nenhuma informação representa dados reais de pessoas, empresas ou operações.
+<p>
+  <sub><strong>Nota:</strong> Todos os dados apresentados nos projetos são fictícios e utilizados exclusivamente para fins ilustrativos e demonstrativos. Nenhuma informação representa dados reais de pessoas, empresas ou operações.</sub>
+</p>
 ---
 
 ## 📊 AI Financial Assistant
