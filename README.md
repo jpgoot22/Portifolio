@@ -11,6 +11,7 @@
 Welcome to my portfolio! I build practical digital solutions by combining **data analysis, process automation, and AI-assisted development**. My experience includes **Excel, Power BI, SQL, and web technologies (HTML, CSS, JS)**, with a focus on transforming business problems into functional and efficient tools.
 
 
+
 🏆 Featured Projects
 
 🌐 Web | AI & Rapid Prototyping
@@ -24,16 +25,17 @@ Interactive Travel Planner — Interactive trip organization tool with editable 
 Eisenhower Matrix & Weekly Planner — Task management application combining prioritization with daily and weekly planning.
 - [View Web Projects](Web/README.md)
 
+
+---
+
+## 📂 Project Catalog  
+
 ### 🎶 Mini Spotify (SQL)
 
 **Mini Spotify** is a comprehensive database architecture simulating a music streaming ecosystem.
 * **Core Strength:** Entity-relationship modeling, relational constraints, and optimized indexing.
 * **Analytical Impact:** Designed complex views and queries to identify user retention patterns and hit-song trends.
 [View Video Overview](https://www.youtube.com/watch?v=keU7UcZ_q4c)  
-
----
-
-## 📂 Project Catalog  
 
 ### 📈 Excel | Data Engineering & Automation
 *High-performance spreadsheets utilizing Power Query, Pivot Tables, and advanced automation.*
