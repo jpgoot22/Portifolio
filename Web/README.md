@@ -5,7 +5,7 @@ Aqui estão alguns dos sites que desenvolvi com HTML, CSS e JavaScript, utilizan
 <p>
   <sub><strong>Nota:</strong> Todos os dados apresentados nos projetos são fictícios e utilizados exclusivamente para fins ilustrativos e demonstrativos. Nenhuma informação representa dados reais de pessoas, empresas ou operações.</sub>
 </p>
----
+
 
 ## 📊 AI Financial Assistant
 <img width="1447" height="925" alt="image" src="https://github.com/user-attachments/assets/eca06d34-33de-44bf-b519-63ff2bc3b362" />
