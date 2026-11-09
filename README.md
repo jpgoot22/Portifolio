@@ -12,9 +12,8 @@ Welcome to my portfolio! I build practical digital solutions by combining **data
 
 
 
-🏆 Featured Projects
 
-🌐 Web | AI & Rapid Prototyping
+## 🌐 Web | AI & Rapid Prototyping
 
 Practical web applications developed with AI-assisted coding, focusing on usability, data visualization, and problem-solving.
 
