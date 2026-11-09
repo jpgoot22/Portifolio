@@ -18,11 +18,11 @@ Welcome to my portfolio! I build practical digital solutions by combining **data
 
 Practical web applications developed with AI-assisted coding, focusing on usability, data visualization, and problem-solving.
 
-- **AI Financial Assistant — Browser-based financial dashboard for monthly and yearly expense visualization.
+- **AI Financial Assistant** — Browser-based financial dashboard for monthly and yearly expense visualization.
 
-- **Interactive Travel Planner — Interactive trip organization tool with editable itineraries and travel information.
+- **Interactive Travel Planner** — Interactive trip organization tool with editable itineraries and travel information.
 
-- **Eisenhower Matrix & Weekly Planner — Task management application combining prioritization with daily and weekly planning.
+- **Eisenhower Matrix & Weekly Planner** — Task management application combining prioritization with daily and weekly planning.
 - [View Web Projects](Web/README.md)
 
 
