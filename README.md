@@ -95,16 +95,29 @@ Eisenhower Matrix & Weekly Planner — Task management application combining pri
 
 Seja bem-vindo ao meu portfólio! Desenvolvo soluções digitais práticas combinando análise de dados, automação de processos e desenvolvimento assistido por IA. Minha experiência envolve Excel, Power BI, SQL e tecnologias Web (HTML, CSS, JS), com foco em transformar problemas reais em ferramentas funcionais e eficientes.
 
-### 🏆 Projeto em Destaque: Mini Spotify (SQL)
+### 🏆 Projeto em Destaque:
 
-**Mini Spotify** é um ecossistema de banco de dados que simula uma plataforma de streaming musical.
-* **Diferencial Técnico:** Modelagem de entidades, restrições relacionais e otimização de performance via índices.
-* **Impacto Analítico:** Criação de views e queries complexas para identificar padrões de retenção de usuários e tendências de popularidade.
-[Vídeo de Apresentação](https://www.youtube.com/watch?v=keU7UcZ_q4c)  
+### 🌐 Web | IA e Prototipagem Rápida
+
+Aplicações web desenvolvidas com auxílio de IA, com foco em usabilidade, visualização de dados e resolução de problemas práticos.
+
+- **AI Financial Assistant** — Painel financeiro interativo para visualização de despesas mensais e anuais.
+- **Interactive Travel Planner** — Ferramenta interativa para organização de viagens, roteiros e informações logísticas.
+- **Eisenhower Matrix & Weekly Planner** — Aplicação de gestão de tarefas que combina priorização com planejamento diário e semanal.
+
+[**Ver Projetos Web**](Web/README.md)
+
 
 ---
 
 ## 📂 Catálogo de Projetos  
+
+
+### 🎶 Mini Spotify (SQL)
+**Mini Spotify** é um ecossistema de banco de dados que simula uma plataforma de streaming musical.
+* **Diferencial Técnico:** Modelagem de entidades, restrições relacionais e otimização de performance via índices.
+* **Impacto Analítico:** Criação de views e queries complexas para identificar padrões de retenção de usuários e tendências de popularidade.
+[Vídeo de Apresentação](https://www.youtube.com/watch?v=keU7UcZ_q4c)
 
 ### 📈 Excel | Engenharia de Dados e Automação
 *Planilhas de alta performance com Power Query, Tabelas Dinâmicas e automação avançada.*
