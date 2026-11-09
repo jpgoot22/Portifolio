@@ -2,6 +2,7 @@
 
 Aqui estão alguns dos sites que desenvolvi com HTML, CSS e JavaScript, utilizando também Inteligência Artificial como apoio na construção. Todos os projetos têm foco em praticidade, visual intuitivo e usabilidade no navegador — sem necessidade de instalação.
 
+Nota: Todos os dados apresentados nos projetos são fictícios e utilizados exclusivamente para fins ilustrativos e demonstrativos. Nenhuma informação representa dados reais de pessoas, empresas ou operações.
 ---
 
 ## 📊 AI Financial Assistant
@@ -45,51 +46,51 @@ Aplicar tecnologia e IA para simplificar a análise de dados financeiros e facil
 
 <img width="1248" height="944" alt="image" src="https://github.com/user-attachments/assets/8dfc739b-a316-432a-9d07-1d022b7ed0b9" />
 
-Interactive web application developed to organize a 10-day trip across Ireland and London for seven adults.
+Aplicação web interativa desenvolvida para organizar uma viagem de 10 dias pela Irlanda e Londres.
 
-### Features
-- Daily itineraries organized by destination.
-- Expandable cards with schedules and travel information.
-- Interactive timeline with the complete trip overview.
-- Direct itinerary editing and automatic saving.
-- Option to restore the original itinerary.
+### Funcionalidades
+- Roteiros diários organizados por destino.
+- Cards expansíveis com horários e informações sobre os passeios.
+- Linha do tempo interativa com a visão geral da viagem.
+- Edição direta do roteiro e salvamento automático.
+- Opção para restaurar o roteiro original.
 
-### Technologies
+### Tecnologias
 - HTML
 - CSS
 - JavaScript
 - Local Storage
-- Artificial Intelligence (AI-assisted development).
+- Inteligência Artificial (utilizada no desenvolvimento do código).
 
-### Objective
-Organize travel information into an interactive and easily editable application.
-
+### Objetivo
+Organizar informações de viagem em uma aplicação interativa, prática e de fácil edição.
 ---
 
 ## ⏳ Eisenhower Matrix & Weekly Planner
 
 <img width="1532" height="765" alt="image" src="https://github.com/user-attachments/assets/1f0cdde2-4872-457f-8ed8-a3cb7d84fdd2" />
 
-Interactive task management application combining the Eisenhower Matrix with daily and weekly planning.
 
-### Features
-- Task prioritization based on urgency and importance.
-- Daily and weekly planning.
-- Drag-and-drop task organization.
-- Task editing, deletion and bulk entry.
-- Automatic saving and duplicate detection.
-- Light and dark themes.
+Aplicação interativa de gestão de tarefas que combina a Matriz de Eisenhower com o planejamento diário e semanal.
 
-### Technologies
+### Funcionalidades
+- Priorização de tarefas com base na urgência e importância.
+- Planejamento diário e semanal de tarefas.
+- Organização de tarefas por meio de arrastar e soltar (drag-and-drop).
+- Criação, edição, exclusão e inserção de múltiplas tarefas.
+- Salvamento automático dos dados e detecção de tarefas duplicadas.
+- Temas claro e escuro.
+
+### Tecnologias
 - HTML
 - CSS
 - JavaScript
 - Tailwind CSS
 - Local Storage
-- Artificial Intelligence (AI-assisted development).
+- Inteligência Artificial (utilizada como auxílio no desenvolvimento).
 
-### Objective
-Combine task prioritization and execution planning in a single productivity tool.
+### Objetivo
+Combinar a priorização de tarefas com o planejamento da execução em uma única ferramenta de produtividade.
 
 
 
