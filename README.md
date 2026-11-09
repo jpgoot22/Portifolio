@@ -10,7 +10,21 @@
 
 Welcome to my portfolio! I build practical digital solutions by combining **data analysis, process automation, and AI-assisted development**. My experience includes **Excel, Power BI, SQL, and web technologies (HTML, CSS, JS)**, with a focus on transforming business problems into functional and efficient tools.
 
-### 🏆 Featured Project: Mini Spotify (SQL)
+
+🏆 Featured Projects
+
+🌐 Web | AI & Rapid Prototyping
+
+Practical web applications developed with AI-assisted coding, focusing on usability, data visualization, and problem-solving.
+
+AI Financial Assistant — Browser-based financial dashboard for monthly and yearly expense visualization.
+
+Interactive Travel Planner — Interactive trip organization tool with editable itineraries and travel information.
+
+Eisenhower Matrix & Weekly Planner — Task management application combining prioritization with daily and weekly planning.
+- [View Web Projects](Web/README.md)
+
+### 🎶 Mini Spotify (SQL)
 
 **Mini Spotify** is a comprehensive database architecture simulating a music streaming ecosystem.
 * **Core Strength:** Entity-relationship modeling, relational constraints, and optimized indexing.
@@ -38,11 +52,6 @@ Welcome to my portfolio! I build practical digital solutions by combining **data
 *Predictive modeling and statistical analysis to drive business optimization.*
 - [iFood Marketing Optimization](Otimização_Campanhas_Marketing_iFood/README.md) — **ROI Recovery:** Pivoted a deficit-running campaign into a profitable operation using customer segmentation and predictive modeling.
 
-### 🌐 Web | AI & Rapid Prototyping
-Practical web applications built with AI-assisted development, focusing on usability, data visualization, and problem-solving.
-
-AI Financial Assistant — A browser-based financial dashboard that transforms transaction data into intuitive monthly and yearly visualizations.
-- [View Web Projects](Web/README.md)
 
 ### 📊 Power BI | Strategic Dashboards
 *Interactive storytelling through data.*
